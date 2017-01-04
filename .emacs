@@ -66,8 +66,8 @@ Return a list of installed packages or nil for every skipped package."
 
 ; leader bindings
 (evil-leader/set-key
-  "v" (lambda () (interactive) (find-file "~/.emacs"))
-  "V" (lambda () (interactive) (load-file "~/.emacs"))
+  "v" (lambda () (interactive) (find-file "~/.emacs.d/.emacs"))
+  "V" (lambda () (interactive) (load-file "~/.emacs.d/.emacs"))
   "p" 'helm-projectile
   "m" 'helm-M-x ; M-x shortcut
   "b" 'helm-buffers-list
