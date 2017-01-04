@@ -38,7 +38,6 @@ Return a list of installed packages or nil for every skipped package."
 			  'ruby-refactor
 			  'auto-complete
 			  'avy
-			  ;'geiser
 			  'rainbow-delimiters
 			  'powerline
 			  'powerline-evil
@@ -108,13 +107,6 @@ Return a list of installed packages or nil for every skipped package."
 
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-
-(require 'ac-geiser)
-(add-hook 'geiser-mode-hook 'ac-geiser-setup)
-(add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'geiser-repl-mode))
 
 ;; RUBY STUFF
 (require 'ruby-refactor)
