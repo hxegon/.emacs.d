@@ -122,9 +122,4 @@ Return a list of installed packages or nil for every skipped package."
 (show-paren-mode t)
 
 ;;;; BEGIN CUSTOM FUNCTIONS
-
-;(defun align-interactive (user-input)
-  ;"opens a prompt, takes a user string, turns that into a regex and aligns on it."
-  ;)
-
 ;;;; END CUSTOM FUNCTIONS
