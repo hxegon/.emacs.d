@@ -70,9 +70,9 @@ Return a list of installed packages or nil for every skipped package."
   "p" 'helm-projectile
   "m" 'helm-M-x ; M-x shortcut
   "b" 'helm-buffers-list
-  "w" 'whwmitespace-mode
+  "w" 'whitespace-mode
   "d" 'robe-ask ; TODO: generalize <leader>d to doc lookup key in whatever language, not just ruby.
-  "gs" 'dmagit-status
+  "gs" 'magit-status
   "SPC" 'avy-goto-char
   "RET" 'align-regexp
   "r" (lambda () (interactive) (execute-extended-command "ruby-refactor"))
