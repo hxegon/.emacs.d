@@ -1,0 +1,125 @@
+;; Vim config migration TODOS
+;; SURVIVAL LEVEL CONFIG
+;; [x] Evil
+;; [x] , leader
+;; [x] config quick edit/resource
+;; [x] mode indicator
+;; [x] H and L remap
+;; [x] ,w window nav
+;; [x] easymotion
+;; [x] zenburn or at least decent colorscheme
+;; [x] surround
+;; [x] line numbers
+;; [x] powerline
+;; [x] align command
+;; [x] nohlsearch
+;; [x] asynch linting/error messages
+;; [x] # comment shortcut
+
+;; packages
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                        ("marmalade" . "http://marmalade-repo.org/packages/")
+			("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+			("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
+
+(defun require-package (package)
+  (setq-default highlight-tabs t)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
+
+;; THEMES
+(require-package 'zenburn-theme)
+(load-theme 'zenburn t)
+
+;; EVIL
+(require-package 'evil)
+(evil-mode t)
+
+(defun nmap (trigger action)
+  (define-key evil-normal-state-map (kbd trigger) action))
+(defun vmap (trigger action)
+  (define-key evil-visual-state-map (kbd trigger) action))
+
+;; evil-leader
+(require-package 'evil-leader)
+(setq evil-leader/leader ",")
+(global-evil-leader-mode)
+;; (setq evil-leader/in-all-states 1)
+
+;; evil-powerline
+(require-package 'powerline)
+(require-package 'powerline-evil)
+(powerline-evil-vim-color-theme)
+
+;; evil-surround
+(require-package 'evil-surround)
+(global-evil-surround-mode t)
+
+;; AVY
+(require-package 'avy)
+
+;; FLYCHECK
+(require-package 'flycheck)
+(global-flycheck-mode)
+
+;; MAPPINGS
+
+;; evil-leader bindings
+(evil-leader/set-key
+  "e" (lambda () (interactive) (find-file "~/.emacs"))
+  "E" (lambda () (interactive) (load-file "~/.emacs"))
+  "z" (lambda () (interactive) (find-file "~/.zshrc"))
+  "x" 'execute-extended-command
+  "w" evil-window-map
+  "RET" 'align-regexp
+  )
+
+(nmap "H" (kbd "g^"))
+(nmap "L" (kbd "g_"))
+(nmap "SPC" 'avy-goto-char)
+(nmap "#" 'comment-line)
+(vmap "#" 'comment-dwim)
+
+;; SETTINGS
+(global-linum-mode t)		; enable line numbers
+(setq linum-format "%4d ")	; nicer line number format
+
+
+;; MISC FIXES
+;;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
