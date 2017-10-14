@@ -16,6 +16,8 @@
 ;; [x] asynch linting/error messages
 ;; [x] # comment shortcut
 
+(setq load-path (cons "~/.emacs.d/vendor" load-path))
+
 ;; packages
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
@@ -67,12 +69,23 @@
 (require-package 'flycheck)
 (global-flycheck-mode)
 
+;; RUBY
+;;; rcodetools
+(load "rcodetools")
+(require 'rcodetools)
+(defun auto-xmp ()
+  "Add xmp comment and run xmp!"
+  (interactive)
+  (end-of-line)
+  (insert " #=>")
+  (xmp))
+
 ;; MAPPINGS
 
 ;; evil-leader bindings
 (evil-leader/set-key
-  "e" (lambda () (interactive) (find-file "~/.emacs"))
-  "E" (lambda () (interactive) (load-file "~/.emacs"))
+  "e" (lambda () (interactive) (find-file "~/.emacs.d/init.el"))
+  "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
   "z" (lambda () (interactive) (find-file "~/.zshrc"))
   "x" 'execute-extended-command
   "w" evil-window-map
@@ -84,6 +97,10 @@
 (nmap "SPC" 'avy-goto-char)
 (nmap "#" 'comment-line)
 (vmap "#" 'comment-dwim)
+
+;;; mode specific
+(evil-leader/set-key-for-mode 'ruby-mode
+  "#" 'auto-xmp)
 
 ;; SETTINGS
 (global-linum-mode t)		; enable line numbers
@@ -116,7 +133,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
+    (rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
