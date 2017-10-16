@@ -86,6 +86,13 @@
 (add-to-list 'auto-mode-alist
 	     '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
 
+;; HELM
+(require-package 'helm)
+(require 'helm-config)
+(helm-mode 1)
+(define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
@@ -96,8 +103,12 @@
   "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
   "z" 'suspend-emacs
   "Z" (lambda () (interactive) (find-file "~/.zshrc"))
+  "x" 'helm-M-x
   "w" evil-window-map
   "RET" 'align-regexp
+  "b" 'helm-buffers-list
+  "k" 'helm-show-kill-ring
+  "f" 'helm-find-files
   "T" 'text-scale-adjust
   )
 
