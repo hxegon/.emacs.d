@@ -20,16 +20,16 @@
 ;; [x] tabs
 ;; [x] helm
 ;; [x] window resize bindings
-;; [ ] Server workflow? (TRAMP + term)
+;; [x] Server workflow (TRAMP + term)
 ;;     - [x] term
-;;     - [ ] tramp
+;;     - [x] tramp
 ;; [x] stop making garbage files everywhere!
 
 ;; Eventually check out/learn/integrate?
 ;; [x] flycheck tooltips
 ;; [ ] Spacemacs style show bindings (in some scenarios)
 ;; [ ] Robe
-;; [ ] helm bookmarks
+;; [x] helm bookmarks
 ;; [ ] helm for evil-leader
 ;; [ ] org-mode
 ;; [ ] magit
@@ -90,6 +90,11 @@
 (require-package 'evil-tabs)
 (global-evil-tabs-mode t)
 
+;; Disable evil in these modes
+(dolist (mode '(dired-mode
+		flycheck-error-list-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
+
 ;; AVY
 (require-package 'avy)
 
@@ -133,14 +138,13 @@
 (evil-leader/set-key
   "," 'save-buffer
   "." 'repeat
-  "e" (lambda () (interactive) (find-file "~/.emacs.d/init.el"))
   "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
   "z" 'suspend-emacs
-  "Z" (lambda () (interactive) (find-file "~/.zshrc"))
   "x" 'helm-M-x
   "w" evil-window-map
   "RET" 'align-regexp
   "b" 'helm-buffers-list
+  "B" 'helm-bookmarks
   "k" 'helm-show-kill-ring
   "f" 'helm-find-files
   "T" 'text-scale-adjust
@@ -164,17 +168,29 @@
 (evil-leader/set-key-for-mode 'enh-ruby-mode
   "#" 'auto-xmp)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; dired
+(define-key dired-mode-map "j" 'dired-next-line)
+(define-key dired-mode-map "k" 'dired-previous-line)
+(define-key dired-mode-map "q" 'kill-this-buffer)
+(define-key dired-mode-map "b" 'helm-buffers-list)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
 
-(global-linum-mode t)			; enable line numbers
-(setq linum-format "%4d ")		; nicer line number format
-(toggle-scroll-bar -1)			; remove gui scrollbars
-(menu-bar-mode -1)			; remove gui menu bar
-(tool-bar-mode -1)			; remove gui menu bar
-(setq ring-bell-function 'ignore)	; Disable annoying bell sound
-(setq auto-save-default nil)		; disable #auto-save-files#
-(setq auto-make-backup nil)		; disabel backupfiles~
+(global-linum-mode t)				; enable line numbers
+(setq linum-format "%4d ")			; nicer line number format
+(toggle-scroll-bar -1)				; remove gui scrollbars
+(menu-bar-mode -1)				; remove gui menu bar
+(tool-bar-mode -1)				; remove gui menu bar
+(setq ring-bell-function 'ignore)		; Disable annoying bell sound
+(setq auto-save-default nil)			; disable #auto-save-files#
+(setq auto-make-backup nil)			; disabel backupfiles~
+(setq tramp-default-method "ssh")		; use ssh by default for tramp
+(put 'dired-find-alternate-file 'disabled nil)	; re-enable a command in dired
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CUSTOM FUNCTIONS
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
@@ -210,3 +226,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; supposed to help with passphrase hanging issue
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
