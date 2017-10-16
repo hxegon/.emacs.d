@@ -131,7 +131,8 @@
 ;; TODO: change lamdas to custom F() so they play nice with helm/errors
 ;; TODO: Consolidate specific file bindings with bookmarks
 (evil-leader/set-key
-  "." 'save-buffer
+  "," 'save-buffer
+  "." 'repeat
   "e" (lambda () (interactive) (find-file "~/.emacs.d/init.el"))
   "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
   "z" 'suspend-emacs
