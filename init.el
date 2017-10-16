@@ -18,6 +18,7 @@
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; packages
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
@@ -80,6 +81,12 @@
   (insert " #=>")
   (xmp))
 
+;; enh-ruby-mode
+(require-package 'enh-ruby-mode)
+(add-to-list 'auto-mode-alist
+	     '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
 ;; evil-leader bindings
@@ -102,11 +109,13 @@
 (evil-leader/set-key-for-mode 'ruby-mode
   "#" 'auto-xmp)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
 (global-linum-mode t)		; enable line numbers
 (setq linum-format "%4d ")	; nicer line number format
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
