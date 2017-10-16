@@ -141,6 +141,10 @@
   "k" 'helm-show-kill-ring
   "f" 'helm-find-files
   "T" 'text-scale-adjust
+  "<up>" 'enlarge-window
+  "<down>" 'shrink-window
+  "<left>" 'shrink-window-horizontally
+  "<right>"  'enlarge-window-horizontally
   )
 
 (nmap "H" (kbd "g^"))
