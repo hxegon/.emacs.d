@@ -15,6 +15,27 @@
 ;; [x] nohlsearch
 ;; [x] asynch linting/error messages
 ;; [x] # comment shortcut
+;; [x] ruby 2 space indentation
+;; [x] simple file find
+;; [x] tabs
+;; [x] helm
+;; [x] window resize bindings
+;; [ ] Server workflow? (TRAMP)
+
+;; Eventually check out/learn/integrate?
+;; [x] flycheck tooltips
+;; [ ] Spacemacs style show bindings (in some scenarios)
+;; [ ] Robe
+;; [ ] helm bookmarks
+;; [ ] helm for evil-leader
+;; [ ] org-mode
+;; [ ] magit
+;; [ ] projectile
+;; [x] emacs-client/daemon
+;; [ ] polish client/daemon config
+;; [ ] eshell
+;; [x] gui emacs
+
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
@@ -105,6 +126,8 @@
 ;; MAPPINGS
 
 ;; evil-leader bindings
+;; TODO: change lamdas to custom F() so they play nice with helm/errors
+;; TODO: Consolidate specific file bindings with bookmarks
 (evil-leader/set-key
   "." 'save-buffer
   "e" (lambda () (interactive) (find-file "~/.emacs.d/init.el"))
@@ -171,7 +194,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
+    (flycheck-pos-tip helm evil-tabs enh-ruby-mode rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
