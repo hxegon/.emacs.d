@@ -91,19 +91,24 @@
 
 ;; evil-leader bindings
 (evil-leader/set-key
+  "." 'save-buffer
   "e" (lambda () (interactive) (find-file "~/.emacs.d/init.el"))
   "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
-  "z" (lambda () (interactive) (find-file "~/.zshrc"))
-  "x" 'execute-extended-command
+  "z" 'suspend-emacs
+  "Z" (lambda () (interactive) (find-file "~/.zshrc"))
   "w" evil-window-map
   "RET" 'align-regexp
+  "T" 'text-scale-adjust
   )
 
 (nmap "H" (kbd "g^"))
 (nmap "L" (kbd "g_"))
+(vmap "H" (kbd "g^"))
+(vmap "L" (kbd "g_"))
 (nmap "SPC" 'avy-goto-char)
 (nmap "#" 'comment-line)
 (vmap "#" 'comment-dwim)
+(nmap "Y" (kbd "y$"))
 
 ;;; mode specific
 (evil-leader/set-key-for-mode 'ruby-mode
