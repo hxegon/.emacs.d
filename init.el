@@ -130,13 +130,18 @@
 (nmap "Y" (kbd "y$"))
 
 ;;; mode specific
-(evil-leader/set-key-for-mode 'ruby-mode
+;;;; ruby
+(evil-leader/set-key-for-mode 'enh-ruby-mode
   "#" 'auto-xmp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
-(global-linum-mode t)		; enable line numbers
-(setq linum-format "%4d ")	; nicer line number format
+(global-linum-mode t)			; enable line numbers
+(setq linum-format "%4d ")		; nicer line number format
+(toggle-scroll-bar -1)			; remove gui scrollbars
+(menu-bar-mode -1)			; remove gui menu bar
+(tool-bar-mode -1)			; remove gui menu bar
+(setq ring-bell-function 'ignore)	; Disable annoying bell sound
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
