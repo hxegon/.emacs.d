@@ -73,6 +73,10 @@
 ;; FLYCHECK
 (require-package 'flycheck)
 (global-flycheck-mode)
+;; flycheck-pos-tip
+(require-package 'flycheck-pos-tip)
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
 
 ;; RUBY
 ;;; rcodetools
