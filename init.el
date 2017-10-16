@@ -20,7 +20,10 @@
 ;; [x] tabs
 ;; [x] helm
 ;; [x] window resize bindings
-;; [ ] Server workflow? (TRAMP)
+;; [ ] Server workflow? (TRAMP + term)
+;;     - [x] term
+;;     - [ ] tramp
+;; [ ] stop making garbage files everywhere!
 
 ;; Eventually check out/learn/integrate?
 ;; [x] flycheck tooltips
@@ -33,7 +36,6 @@
 ;; [ ] projectile
 ;; [x] emacs-client/daemon
 ;; [ ] polish client/daemon config
-;; [ ] eshell
 ;; [x] gui emacs
 
 
