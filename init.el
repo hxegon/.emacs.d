@@ -145,11 +145,12 @@
   "z" 'suspend-emacs
   "x" 'helm-M-x
   "w" evil-window-map
-  "RET" 'align-regexp
+  "<return>" 'align-regexp
   "b" 'helm-buffers-list
   "B" 'helm-bookmarks
   "k" 'helm-show-kill-ring
   "f" 'helm-find-files
+  "t" (lambda () (interactive) (term "/bin/zsh"))
   "T" 'text-scale-adjust
   "<up>" 'enlarge-window
   "<down>" 'shrink-window
