@@ -63,6 +63,10 @@
 (require-package 'evil-surround)
 (global-evil-surround-mode t)
 
+;; evil-tabs
+(require-package 'evil-tabs)
+(global-evil-tabs-mode t)
+
 ;; AVY
 (require-package 'avy)
 
