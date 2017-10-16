@@ -23,7 +23,7 @@
 ;; [ ] Server workflow? (TRAMP + term)
 ;;     - [x] term
 ;;     - [ ] tramp
-;; [ ] stop making garbage files everywhere!
+;; [x] stop making garbage files everywhere!
 
 ;; Eventually check out/learn/integrate?
 ;; [x] flycheck tooltips
@@ -166,13 +166,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
+
 (global-linum-mode t)			; enable line numbers
 (setq linum-format "%4d ")		; nicer line number format
 (toggle-scroll-bar -1)			; remove gui scrollbars
 (menu-bar-mode -1)			; remove gui menu bar
 (tool-bar-mode -1)			; remove gui menu bar
 (setq ring-bell-function 'ignore)	; Disable annoying bell sound
-
+(setq auto-save-default nil)		; disable #auto-save-files#
+(setq auto-make-backup nil)		; disabel backupfiles~
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
