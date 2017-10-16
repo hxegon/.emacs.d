@@ -132,6 +132,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
+;; global
+(global-set-key (kbd "M-x") 'helm-M-x)
+
 ;; evil-leader bindings
 ;; TODO: change lamdas to custom F() so they play nice with helm/errors
 ;; TODO: Consolidate specific file bindings with bookmarks
