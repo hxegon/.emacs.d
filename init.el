@@ -64,7 +64,7 @@
 
 ;; EVIL
 (require-package 'evil)
-(evil-mode t)
+(evil-mode 1)
 
 (defun nmap (trigger action)
   (define-key evil-normal-state-map (kbd trigger) action))
@@ -128,12 +128,20 @@
 (helm-mode 1)
 (define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
 
+;; MAGIT
+(require-package 'magit)
+
+;; evil-magit
+; must be required after evil and magit
+(require-package 'evil-magit)
+(setq evil-magit-state 'normal)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
 ;; global
 (global-set-key (kbd "M-x") 'helm-M-x)
+(windmove-default-keybindings)
 
 ;; evil-leader bindings
 ;; TODO: change lamdas to custom F() so they play nice with helm/errors
@@ -223,7 +231,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck-pos-tip helm evil-tabs enh-ruby-mode rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
+    (evil-magit magit flycheck-pos-tip helm evil-tabs enh-ruby-mode rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
