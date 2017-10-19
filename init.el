@@ -43,6 +43,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; packages
+(require 'package)
+(setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                         ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -50,21 +52,22 @@
 			("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
-(defun require-package (package)
-  (setq-default highlight-tabs t)
-  "Install given PACKAGE."
-  (unless (package-installed-p package)
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
+;; bootstrap 'use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+
+;; always install missing packages
+(setq use-package-always-ensure t)
 
 ;; THEMES
-(require-package 'zenburn-theme)
-(load-theme 'zenburn t)
+(use-package zenburn-theme)
 
 ;; EVIL
-(require-package 'evil)
-(evil-mode 1)
+(use-package evil
+  :config
+  (evil-mode 1))
 
 (defun nmap (trigger action)
   (define-key evil-normal-state-map (kbd trigger) action))
@@ -72,39 +75,46 @@
   (define-key evil-visual-state-map (kbd trigger) action))
 
 ;; evil-leader
-(require-package 'evil-leader)
-(setq evil-leader/leader ",")
-(global-evil-leader-mode)
-;; (setq evil-leader/in-all-states 1)
+(use-package evil-leader
+  :config
+  (setq evil-leader/leader ",")
+  (global-evil-leader-mode))
 
 ;; evil-powerline
-(require-package 'powerline)
-(require-package 'powerline-evil)
-(powerline-evil-vim-color-theme)
+(use-package powerline
+  :config (powerline-evil-vim-color-theme))
 
 ;; evil-surround
-(require-package 'evil-surround)
-(global-evil-surround-mode t)
+(use-package evil-surround
+  :defer t
+  :config (global-evil-surround-mode t))
 
 ;; evil-tabs
-(require-package 'evil-tabs)
-(global-evil-tabs-mode t)
+(use-package evil-tabs
+  :defer t
+  :config (global-evil-tabs-mode t))
 
 ;; Disable evil in these modes
-(dolist (mode '(dired-mode
-		flycheck-error-list-mode))
-  (add-to-list 'evil-emacs-state-modes mode))
+;; (dolist (mode '(dired-mode
+;; 		flycheck-error-list-mode))
+;;   (add-to-list 'evil-emacs-state-modes mode))
 
 ;; AVY
-(require-package 'avy)
+(use-package avy
+  :defer t)
 
 ;; FLYCHECK
-(require-package 'flycheck)
-(global-flycheck-mode)
+(use-package flycheck
+  :defer t
+  :config
+  (global-flycheck-mode))
+
 ;; flycheck-pos-tip
-(require-package 'flycheck-pos-tip)
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
+(use-package flycheck-pos-tip
+  :defer t
+  :config
+  (with-eval-after-load 'flycheck
+    (flycheck-pos-tip-mode)))
 
 ;; RUBY
 ;;; rcodetools
@@ -118,23 +128,30 @@
   (xmp))
 
 ;; enh-ruby-mode
-(require-package 'enh-ruby-mode)
-(add-to-list 'auto-mode-alist
-	     '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+(use-package enh-ruby-mode
+  :defer t
+  :config
+  (add-to-list 'auto-mode-alist
+	       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
 
 ;; HELM
-(require-package 'helm)
-(require 'helm-config)
-(helm-mode 1)
-(define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
+(use-package helm
+  :defer t
+  :config
+    (require 'helm-config)
+    (helm-mode 1)
+    (define-key helm-find-files-map "\t" 'helm-execute-persistent-action))
 
 ;; MAGIT
-(require-package 'magit)
+(use-package magit)
 
 ;; evil-magit
 ; must be required after evil and magit
-(require-package 'evil-magit)
-(setq evil-magit-state 'normal)
+(use-package evil-magit
+  :config
+  (setq evil-magit-state 'normal)
+  (add-hook 'magit-mode-hook 'evil-local-mode)
+  (add-hook 'git-rebase-mode-hook 'evil-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
@@ -231,7 +248,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-magit magit flycheck-pos-tip helm evil-tabs enh-ruby-mode rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
+    (use-package magit evil-magit flycheck-pos-tip helm evil-tabs enh-ruby-mode rcodetools flycheck powerline powerline-evil evil-powerline evil-surround zenburn-theme avy evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
