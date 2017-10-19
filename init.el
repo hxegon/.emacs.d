@@ -143,12 +143,9 @@
     (define-key helm-find-files-map "\t" 'helm-execute-persistent-action))
 
 ;; MAGIT
-(use-package magit)
-
-;; evil-magit
-; must be required after evil and magit
-(use-package evil-magit
+(use-package magit
   :config
+  (require 'evil-magit)
   (setq evil-magit-state 'normal)
   (add-hook 'magit-mode-hook 'evil-local-mode)
   (add-hook 'git-rebase-mode-hook 'evil-local-mode))
@@ -181,6 +178,7 @@
   "<down>" 'shrink-window
   "<left>" 'shrink-window-horizontally
   "<right>"  'enlarge-window-horizontally
+  "gs" 'magit-status
   )
 
 (nmap "H" (kbd "g^"))
