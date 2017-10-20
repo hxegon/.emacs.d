@@ -31,7 +31,7 @@
 ;; [-] Robe (Not worth, unmaintained... undocumented... :(), still better than nvim with magit, gui, use-package, elisp, tramp)
 ;; [x] helm bookmarks
 ;; [ ] helm for evil-leader
-;; [ ] org-mode
+;; [x] org-mode
 ;; [x] magit
 ;; [ ] projectile
 ;; [x] emacs-client/daemon
@@ -42,6 +42,7 @@
 ;; [x] ruby-refactor
 ;; [ ] which-key polish
 ;; [ ] fix xmp binding
+;; [ ] org-mode archive setup
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
