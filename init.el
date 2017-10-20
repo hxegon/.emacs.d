@@ -143,6 +143,7 @@
 
 ;; MAGIT
 (use-package magit
+  :defer t
   :config
   (require 'evil-magit)
   (setq evil-magit-state 'normal)
