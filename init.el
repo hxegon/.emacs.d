@@ -199,7 +199,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
 
-(global-linum-mode t)				; enable line numbers
+(add-hook 'prog-mode-hook 'linum-mode)		; add line numbers for prog and text files
+(add-hook 'text-mode-hook 'linum-mode)
 (setq linum-format "%4d ")			; nicer line number format
 (toggle-scroll-bar -1)				; remove gui scrollbars
 (menu-bar-mode -1)				; remove gui menu bar
