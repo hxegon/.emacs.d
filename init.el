@@ -28,7 +28,7 @@
 ;; Eventually check out/learn/integrate?
 ;; [x] flycheck tooltips
 ;; [ ] Spacemacs style show bindings (in some scenarios)
-;; [ ] Robe
+;; [-] Robe (Not worth, unmaintained... undocumented... :(), still better than nvim with magit, gui, use-package, elisp, tramp)
 ;; [x] helm bookmarks
 ;; [ ] helm for evil-leader
 ;; [ ] org-mode
