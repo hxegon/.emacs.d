@@ -131,8 +131,7 @@
 (use-package enh-ruby-mode
   :defer t
   :config
-  (add-to-list 'auto-mode-alist
-	       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
+  :mode ("\\.rb\\'" "\\.ru\\'" "\\.rake\\'" "\\.thor\\'" "\\.jbuilder\\'" "\\.gemspec\\'" "\\.podspec\\'" "\\.Gemfile\\'" "\\.Rakefile\\'" "\\.Capfile\\'" "\\.Thorfile\\'" "\\.Vagrantfile\\'" "\\.Guardfile\\'" "\\.Podfile\\'"))
 
 ;; HELM
 (use-package helm
