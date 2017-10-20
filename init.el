@@ -27,7 +27,7 @@
 
 ;; Eventually check out/learn/integrate?
 ;; [x] flycheck tooltips
-;; [ ] Spacemacs style show bindings (in some scenarios)
+;; [x] Spacemacs style show bindings (in some scenarios)
 ;; [-] Robe (Not worth, unmaintained... undocumented... :(), still better than nvim with magit, gui, use-package, elisp, tramp)
 ;; [x] helm bookmarks
 ;; [ ] helm for evil-leader
@@ -39,6 +39,7 @@
 ;; [x] gui emacs
 ;; [ ] smartparens
 ;; [x] rainbow delimiters
+;; [ ] which-key polish
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
@@ -146,6 +147,9 @@
   :defer t
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+;; which-key
+(use-package which-key
+  :config (which-key-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
@@ -159,7 +163,7 @@
 (evil-leader/set-key
   "," 'save-buffer
   "." 'repeat
-  "E" (lambda () (interactive) (load-file "~/.emacs.d/init.el"))
+  "E" 'load-dot-emacs
   "z" 'suspend-emacs
   "x" 'helm-M-x
   "w" evil-window-map
@@ -168,7 +172,7 @@
   "B" 'helm-bookmarks
   "k" 'helm-show-kill-ring
   "f" 'helm-find-files
-  "t" (lambda () (interactive) (term "/bin/zsh"))
+  "t" 'launch-term
   "T" 'text-scale-adjust
   "<up>" 'enlarge-window
   "<down>" 'shrink-window
@@ -214,6 +218,15 @@
   (define-key evil-normal-state-map (kbd trigger) action))
 (defun vmap (trigger action)
   (define-key evil-visual-state-map (kbd trigger) action))
+;;; evil-leader 'lamdas', turned into functions to play nice with emacs
+(defun load-dot-emacs ()
+  "loads ~/.emacs.d/init.el"
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
+(defun launch-term ()
+  "launches a zsh term"
+  (interactive)
+  (term "/bin/zsh"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
