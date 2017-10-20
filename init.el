@@ -196,6 +196,7 @@
   "<return>" 'align-regexp
   "b" 'helm-buffers-list
   "B" 'helm-bookmarks
+  "R" 'helm-recentf
   "k" 'helm-show-kill-ring
   "f" 'helm-find-files
   "t" 'launch-term
@@ -238,6 +239,8 @@
 (setq auto-make-backup nil)			; disabel backupfiles~
 (setq tramp-default-method "ssh")		; use ssh by default for tramp
 (put 'dired-find-alternate-file 'disabled nil)	; re-enable a command in dired
+(recentf-mode 1)				; enable recent file tracking
+(setq recentf-max-menu-items 25)		; limit to 25
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
