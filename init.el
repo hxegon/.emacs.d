@@ -32,7 +32,7 @@
 ;; [x] helm bookmarks
 ;; [ ] helm for evil-leader
 ;; [ ] org-mode
-;; [ ] magit
+;; [x] magit
 ;; [ ] projectile
 ;; [x] emacs-client/daemon
 ;; [ ] polish client/daemon config
