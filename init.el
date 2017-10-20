@@ -94,11 +94,6 @@
   :defer t
   :config (global-evil-tabs-mode t))
 
-;; Disable evil in these modes
-;; (dolist (mode '(dired-mode
-;; 		flycheck-error-list-mode))
-;;   (add-to-list 'evil-emacs-state-modes mode))
-
 ;; AVY
 (use-package avy
   :defer t)
@@ -194,13 +189,6 @@
 ;;;; ruby
 (evil-leader/set-key-for-mode 'enh-ruby-mode
   "#" 'auto-xmp)
-
-;;;; dired
-(define-key dired-mode-map "j" 'dired-next-line)
-(define-key dired-mode-map "k" 'dired-previous-line)
-(define-key dired-mode-map "q" 'kill-this-buffer)
-(define-key dired-mode-map "b" 'helm-buffers-list)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
