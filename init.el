@@ -37,7 +37,8 @@
 ;; [x] emacs-client/daemon
 ;; [ ] polish client/daemon config
 ;; [x] gui emacs
-
+;; [ ] smartparens
+;; [x] rainbow delimiters
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
@@ -144,6 +145,11 @@
   (setq evil-magit-state 'normal)
   (add-hook 'magit-mode-hook 'evil-local-mode)
   (add-hook 'git-rebase-mode-hook 'evil-local-mode))
+
+;; rainbow-delimiters
+(use-package rainbow-delimiters
+  :defer t
+  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
