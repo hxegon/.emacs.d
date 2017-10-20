@@ -37,10 +37,11 @@
 ;; [x] emacs-client/daemon
 ;; [ ] polish client/daemon config
 ;; [x] gui emacs
-;; [ ] smartparens
+;; [ ] better delimiter (paren) manipulation
 ;; [x] rainbow delimiters
 ;; [x] ruby-refactor
 ;; [ ] which-key polish
+;; [ ] fix xmp binding
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
 
