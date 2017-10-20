@@ -158,6 +158,24 @@
 ;; which-key
 (use-package which-key
   :config (which-key-mode))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CUSTOM FUNCTIONS
+
+;; evil related:
+(defun nmap (trigger action)
+  (define-key evil-normal-state-map (kbd trigger) action))
+(defun vmap (trigger action)
+  (define-key evil-visual-state-map (kbd trigger) action))
+;;; evil-leader 'lamdas', turned into functions to play nice with emacs
+(defun load-dot-emacs ()
+  "loads ~/.emacs.d/init.el"
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
+(defun launch-term ()
+  "launches a zsh term"
+  (interactive)
+  (term "/bin/zsh"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
 
@@ -220,24 +238,6 @@
 (setq auto-make-backup nil)			; disabel backupfiles~
 (setq tramp-default-method "ssh")		; use ssh by default for tramp
 (put 'dired-find-alternate-file 'disabled nil)	; re-enable a command in dired
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CUSTOM FUNCTIONS
-
-;; evil related:
-(defun nmap (trigger action)
-  (define-key evil-normal-state-map (kbd trigger) action))
-(defun vmap (trigger action)
-  (define-key evil-visual-state-map (kbd trigger) action))
-;;; evil-leader 'lamdas', turned into functions to play nice with emacs
-(defun load-dot-emacs ()
-  "loads ~/.emacs.d/init.el"
-  (interactive)
-  (load-file "~/.emacs.d/init.el"))
-(defun launch-term ()
-  "launches a zsh term"
-  (interactive)
-  (term "/bin/zsh"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
