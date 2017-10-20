@@ -194,6 +194,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (windmove-default-keybindings)
 (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-ca" 'org-agenda)
 
 ;; evil-leader bindings
 ;; TODO: change lamdas to custom F() so they play nice with helm/errors
@@ -259,7 +260,7 @@
                          "~/Org/active.org"
                          "~/Org/tickler.org"))
 (setq org-refile-targets '(("~/Org/active.org" :maxlevel . 3)
-                           ("~/Org/someday.org" :level . 1)
+                           ("~/Org/someday.org" :maxlevel . 1)
                            ("~/Org/tickler.org" :maxlevel . 2)))
 (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                (file+headline "~/Org/inbox.org" "Tasks")
@@ -267,6 +268,7 @@
                               ("T" "Tickler" entry
                                (file+headline "~/Org/tickler.org" "Tickler")
                                "* %i%? \n %U")))
+(setq org-agenda-span 14)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
