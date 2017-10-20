@@ -193,6 +193,7 @@
 ;; global
 (global-set-key (kbd "M-x") 'helm-M-x)
 (windmove-default-keybindings)
+(define-key global-map "\C-cc" 'org-capture)
 
 ;; evil-leader bindings
 ;; TODO: change lamdas to custom F() so they play nice with helm/errors
@@ -253,6 +254,19 @@
 (setq org-hide-leading-stars t)			; only show last star and good indent
 (recentf-mode 1)				; enable recent file tracking
 (setq recentf-max-menu-items 25)		; limit to 25
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-agenda-files '("~/Org/inbox.org"
+                         "~/Org/active.org"
+                         "~/Org/tickler.org"))
+(setq org-refile-targets '(("~/Org/active.org" :maxlevel . 3)
+                           ("~/Org/someday.org" :level . 1)
+                           ("~/Org/tickler.org" :maxlevel . 2)))
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/Org/inbox.org" "Tasks")
+                               "* TODO %i%?")
+                              ("T" "Tickler" entry
+                               (file+headline "~/Org/tickler.org" "Tickler")
+                               "* %i%? \n %U")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
