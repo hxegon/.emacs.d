@@ -70,11 +70,6 @@
   :config
   (evil-mode 1))
 
-(defun nmap (trigger action)
-  (define-key evil-normal-state-map (kbd trigger) action))
-(defun vmap (trigger action)
-  (define-key evil-visual-state-map (kbd trigger) action))
-
 ;; evil-leader
 (use-package evil-leader
   :config
@@ -213,6 +208,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM FUNCTIONS
+
+;; evil related:
+(defun nmap (trigger action)
+  (define-key evil-normal-state-map (kbd trigger) action))
+(defun vmap (trigger action)
+  (define-key evil-visual-state-map (kbd trigger) action))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
