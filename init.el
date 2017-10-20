@@ -39,6 +39,7 @@
 ;; [x] gui emacs
 ;; [ ] smartparens
 ;; [x] rainbow delimiters
+;; [x] ruby-refactor
 ;; [ ] which-key polish
 
 (setq load-path (cons "~/.emacs.d/vendor" load-path))
@@ -125,6 +126,12 @@
   :config
   :mode ("\\.rb\\'" "\\.ru\\'" "\\.rake\\'" "\\.thor\\'" "\\.jbuilder\\'" "\\.gemspec\\'" "\\.podspec\\'" "\\.Gemfile\\'" "\\.Rakefile\\'" "\\.Capfile\\'" "\\.Thorfile\\'" "\\.Vagrantfile\\'" "\\.Guardfile\\'" "\\.Podfile\\'"))
 
+;; ruby-refactor
+(use-package ruby-refactor
+  :defer t
+  :config
+  (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode-launch))
+
 ;; HELM
 (use-package helm
   :defer t
@@ -193,6 +200,9 @@
 ;;; mode specific
 ;;;; ruby
 (evil-leader/set-key-for-mode 'enh-ruby-mode
+  "rm" 'ruby-refactor-extract-to-method
+  "rv" 'ruby-refactor-extract-local-variable
+  "rp" 'ruby-refactor-convert-post-conditional
   "#" 'auto-xmp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
