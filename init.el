@@ -158,6 +158,17 @@
 ;; which-key
 (use-package which-key
   :config (which-key-mode))
+
+(use-package htmlize
+  :defer t)
+
+;; org-mode
+(use-package org
+  :defer t
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((ruby . t))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM FUNCTIONS
 
@@ -239,6 +250,7 @@
 (setq auto-make-backup nil)			; disabel backupfiles~
 (setq tramp-default-method "ssh")		; use ssh by default for tramp
 (put 'dired-find-alternate-file 'disabled nil)	; re-enable a command in dired
+(setq org-hide-leading-stars t)			; only show last star and good indent
 (recentf-mode 1)				; enable recent file tracking
 (setq recentf-max-menu-items 25)		; limit to 25
 
