@@ -40,7 +40,6 @@
 ;; [ ] better delimiter (paren) manipulation
 ;; [x] rainbow delimiters
 ;; [x] ruby-refactor
-;; [ ] which-key polish
 ;; [ ] fix xmp binding
 ;; [ ] org-mode archive setup
 
