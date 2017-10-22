@@ -249,7 +249,7 @@
 (tool-bar-mode -1)				; remove gui menu bar
 (setq ring-bell-function 'ignore)		; Disable annoying bell sound
 (setq auto-save-default nil)			; disable #auto-save-files#
-(setq auto-make-backup nil)			; disabel backupfiles~
+(setq make-backup-files nil)			; disabel backupfiles~
 (setq tramp-default-method "ssh")		; use ssh by default for tramp
 (put 'dired-find-alternate-file 'disabled nil)	; re-enable a command in dired
 (setq org-hide-leading-stars t)			; only show last star and good indent
