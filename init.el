@@ -268,10 +268,12 @@
                               ("T" "Tickler" entry
                                (file+headline "~/Org/tickler.org" "Tickler")
                                "* %i%? \n %U")))
-(setq org-agenda-span 14) ; change agenda display period to two weeks
-(advice-add 'org-refile :after ; advise to save org buffers after refile
+(setq org-agenda-span 14)			; change agenda display period to two weeks
+(advice-add 'org-refile :after			; advise to save org buffers after refile
         (lambda (&rest _)
         (org-save-all-org-buffers)))
+(setq initial-buffer-choice "~/Org/active.org") ; startup buffer set to active org file
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FIXES
 ;;; esc quits
