@@ -201,7 +201,7 @@
 ;; TODO: Consolidate specific file bindings with bookmarks
 (evil-leader/set-key
   "," 'save-buffer
-  "." 'repeat
+  "." 'other-window
   "E" 'load-dot-emacs
   "z" 'suspend-emacs
   "x" 'helm-M-x
