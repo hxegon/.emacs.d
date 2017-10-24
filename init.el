@@ -169,6 +169,9 @@
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((ruby . t))))
 
+;; s.el, "emacs' long lost string manipulation library"
+(use-package s)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM FUNCTIONS
 
@@ -186,6 +189,35 @@
   "launches a zsh term"
   (interactive)
   (term "/bin/zsh"))
+
+(defun hours-matches (text)
+  "return list of /\s\d\d:\d\d\s/ matches of text."
+  (let ((timestamp-regexp "[[:space:]]\\([[:digit:]][[:digit:]]:[[:digit:]][[:digit:]]\\)[[:space:]]?"))
+    (thread-last (s-match-strings-all timestamp-regexp text)
+      (mapcar (lambda (e) (car (last e))))
+      (mapcar 's-trim))
+    ))
+
+(defun calc-ts-diff (first-ts second-ts)
+  "returns diff between 2 hh:mm format timestamps as string"
+  (let* ((times (mapcar (lambda (ts) (mapcar 'string-to-int (s-split ":" ts))) (list first-ts second-ts))) ; ((hours minutes) (hours minutes))
+	 (minutes (- (nth 1 (nth 1 times)) (nth 1 (nth 0 times)))) ; doesn't take into account 60 cap?
+	 (hours (-
+		 (- (car (nth 1 times)) (car (nth 0 times)))
+		 (if (< minutes 0) 1 0))))
+    (format "%d:%02d" hours (if (< minutes 0) (+ 60 minutes) minutes))
+    ))
+  
+(defun append-line-hour-total ()
+  "Calculate the difference between two hh:mm timestamps on current line and append ' | Total: <diffhh:diffmm>'"
+  (interactive)
+  (let ((matches (hours-matches (thing-at-point 'line t))))
+    (if (= 2 (length matches))
+	(progn
+	  (end-of-line)
+	  (insert (format " | Total: %s" (apply 'calc-ts-diff matches))))
+      (message (format "Wrong number of hour timestamps! Expected 2, got %d" (length matches))) ; will report 1 with '(nil)
+    )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MAPPINGS
