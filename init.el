@@ -230,6 +230,11 @@
   "rp" 'ruby-refactor-convert-post-conditional
   "#" 'auto-xmp)
 
+;;;; org mode
+(evil-leader/set-key-for-mode 'org-mode
+  "o" (lambda () (interactive) (end-of-line) (org-meta-return))
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
 
