@@ -217,6 +217,7 @@
 (vmap "H" (kbd "g^"))
 (vmap "L" (kbd "g_"))
 (nmap "SPC" 'avy-goto-char)
+(vmap "SPC" 'avy-goto-char)
 (nmap "#" 'comment-line)
 (vmap "#" 'comment-dwim)
 (nmap "Y" (kbd "y$"))
