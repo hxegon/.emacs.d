@@ -198,9 +198,13 @@
       (mapcar 's-trim))
     ))
 
+(defun hours-s-to-int-list (hours-s)
+  "Takes an hours string, returns '(hours-int minutes-int)"
+  (mapcar 'string-to-int (s-split ":" hours-s)))
+
 (defun calc-ts-diff (first-ts second-ts)
   "returns diff between 2 hh:mm format timestamps as string"
-  (let* ((times (mapcar (lambda (ts) (mapcar 'string-to-int (s-split ":" ts))) (list first-ts second-ts))) ; ((hours minutes) (hours minutes))
+  (let* ((times (mapcar 'hours-s-to-int-list (list first-ts second-ts))) ; ((hours minutes) (hours minutes))
 	 (minutes (- (nth 1 (nth 1 times)) (nth 1 (nth 0 times)))) ; doesn't take into account 60 cap?
 	 (hours (-
 		 (- (car (nth 1 times)) (car (nth 0 times)))
