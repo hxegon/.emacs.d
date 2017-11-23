@@ -233,8 +233,7 @@
 
 ;;;; org mode
 (evil-leader/set-key-for-mode 'org-mode
-  "o" (lambda () (interactive) (end-of-line) (org-meta-return))
-  )
+  "o" (lambda () (interactive) (end-of-line) (org-meta-return)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SETTINGS
