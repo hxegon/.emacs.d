@@ -122,7 +122,8 @@
   :defer t
   :config
   (org-babel-do-load-languages 'org-babel-load-languages
-			       '((ruby . t)))
+			       '((ruby . t)
+				 (haskell . t)))
   (org-toggle-pretty-entities))
 
 ;; s.el, "emacs' long lost string manipulation library"
