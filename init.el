@@ -114,8 +114,7 @@
 (use-package which-key
   :config (which-key-mode))
 
-(use-package htmlize
-  :defer t)
+(use-package htmlize)
 
 ;; org-mode
 (use-package org
