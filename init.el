@@ -66,11 +66,11 @@
 ;; Delete whitespace before a file is saved
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(tool-bar-mode -1) ; disable gui emacs toolbar
-(menu-bar-mode -1) ; disable menu bar
-(scroll-bar-mode -1) ; disable gui scrollbar
-(global-hl-line-mode t) ; highlight current line
-(line-number-mode t) ; add line numbers to status bar
+(tool-bar-mode -1)                    ; disable gui emacs toolbar
+(menu-bar-mode -1)                    ; disable menu bar
+(scroll-bar-mode -1)                  ; disable gui scrollbar
+(global-hl-line-mode t)               ; highlight current line
+(line-number-mode t)                  ; add line numbers to status bar
 
 ;; -------- Packages --------
 
@@ -97,6 +97,7 @@
   (which-key-mode t)
   :diminish which-key-mode)
 
+;; Lightweight generic completion engine
 (use-package ivy
   :ensure t
   :diminish (ivy-mode . "")
@@ -117,6 +118,7 @@
   (counsel-mode)
   :diminish counsel-mode)
 
+;; isearch replacement using ivy
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)))
@@ -142,6 +144,7 @@
   :ensure t
   :config (powerline-default-theme))
 
+;; EasyMotion style code navigation
 (use-package avy
   :ensure t
   :defer t
