@@ -1,0 +1,6 @@
+.recentf
+backups/
+elpa/
+var/
+etc/
+custom-file.el
