@@ -158,3 +158,14 @@
 (use-package git-gutter-fringe
   :ensure t
   :config (global-git-gutter-mode +1))
+
+;; group sequencable commands together
+(use-package hydra
+  :ensure t
+  :config
+  (defhydra ui (global-map "C-, g")
+    "gui adjustments"
+    (">" enlarge-window-horizontally "enlarge window horizontally")
+    ("<" shrink-window-horizontally "shrink window horizontally")
+    ("+" text-scale-increase "increase text size")
+    ("-" text-scale-decrease "decrease text size")))
