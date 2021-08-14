@@ -132,9 +132,9 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  :init
-  (add-hook 'prog-mode 'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode 'rainbow-delimiters-mode))
+  :config
+  (add-hook 'prog-mode #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode))
 
 (use-package gruber-darker-theme
   :ensure t
