@@ -123,6 +123,7 @@
   :ensure t
   :bind (("C-s" . swiper)))
 
+;; project based operations
 (use-package projectile
   :ensure t
   :config
@@ -130,6 +131,7 @@
   :bind (("C-x f" . projectile-find-file)
          ("C-x p" . projectile-switch-project)))
 
+;; keep track of delimiter nesting through layered syntax highlighting
 (use-package rainbow-delimiters
   :ensure t
   :config
@@ -145,6 +147,7 @@
   :ensure t
   :init (load-theme 'zenburn t))
 
+;; pretty status bar
 (use-package powerline
   :ensure t
   :config (powerline-default-theme))
@@ -155,35 +158,32 @@
   :defer t
   :bind (("C-;" . avy-goto-char)))
 
+;; Git integration
 (use-package magit
   :ensure t
   :defer t
   :bind (("C-x g" . magit-status)))
 
+;; Show changed lines on the left
 (use-package git-gutter-fringe
   :ensure t
+  :diminish git-gutter-mode
   :config (global-git-gutter-mode +1))
 
 ;; group sequencable commands together
-(use-package hydra
-  :ensure t
-  :config
-  (defhydra ui (global-map "C-, g")
-    "gui adjustments"
-    (">" enlarge-window-horizontally "enlarge window horizontally")
-    ("<" shrink-window-horizontally "shrink window horizontally")
-    ("+" text-scale-increase "increase text size")
-    ("-" text-scale-decrease "decrease text size")
-    ("s" split-window-below "split window horizontally")
-    ("v" split-window-right "split window vertically"))
-  (defhydra common (global-map "`")
-    "Common actions"
-    ("`" (lambda () (interactive) (insert "`")) "insert literal ` character")
-    ("s" save-buffer "save buffer")
-    ("b" ivy-switch-buffer "switch buffer")
-    ("o" other-window "select other window")
-    ("SPC" avy-goto-char "avy goto char")
-    ("g" magit-status "magit status")))
+;; FIXME: this is overridden in the lispy keymap
+;; (use-package hydra
+;;   :ensure t
+;;   :config
+;;   (defhydra common (global-map "`")
+;;     "Common actions"
+;;     ("`" (lambda () (interactive) (insert "`")) "insert literal ` character and exit" :exit t)
+;;     (">" enlarge-window "enlarge window")
+;;     ("<" shrink-window "shrink window")
+;;     ("+" text-scale-increase "increase text size")
+;;     ("-" text-scale-decrease "decrease text size")
+;;     ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t)
+;;     ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t)))
 
 ;; -------- Clojure support --------
 ;; syntax highlighting for .clj, .cljs, .cljc
