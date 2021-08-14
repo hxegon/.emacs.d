@@ -224,3 +224,8 @@
   :config
   (when (memq window-system '(mac ns x)) ; Only run when using a graphical emacs
     (exec-path-from-shell-initialize)))
+
+;; Package for markdown files, mostly used for syntax highlighting and org-mode style folding
+(use-package markdown-mode
+  :ensure t
+  :defer t)
