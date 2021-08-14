@@ -136,9 +136,14 @@
   (add-hook 'prog-mode #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode))
 
-(use-package gruber-darker-theme
+;; Simple dark theme
+;; (use-package gruber-darker-theme
+;;   :ensure t
+;;   :init (load-theme 'gruber-darker t))
+
+(use-package zenburn-theme
   :ensure t
-  :init (load-theme 'gruber-darker t))
+  :init (load-theme 'zenburn t))
 
 (use-package powerline
   :ensure t
