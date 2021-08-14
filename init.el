@@ -179,3 +179,43 @@
     ("o" other-window "select other window")
     ("SPC" avy-goto-char "avy goto char")
     ("g" magit-status "magit status")))
+
+;; -------- Clojure support --------
+;; syntax highlighting for .clj, .cljs, .cljc
+(use-package clojure-mode
+  :ensure t
+  :defer t
+  :after rainbow-delimiters
+  :mode
+  (("\\.clj\\'" . clojure-mode)
+   ("\\.edn\\'" . clojure-mode))
+  :init
+  (add-hook 'clojure-mode-hook #'show-paren-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+
+;; interactive clojure programming support
+(use-package cider
+  :ensure t
+  :defer t
+  :after clojure-mode
+  :init
+  (add-hook 'clojure-mode-hook 'cider-mode)
+  :config
+  (cider-repl-toggle-pretty-printing))
+
+;; improved lisp editing based on cursor position
+(defun enable-lispy-mode () (lispy-mode 1))
+(use-package lispy
+  :ensure t
+  :defer t
+  :after clojure-mode
+  :init
+  (add-hook 'clojure-mode-hook #'enable-lispy-mode)
+  (add-hook 'emacs-lisp-mode-hook #'enable-lispy-mode))
+
+;; Fixes path issues present when on using a gui emacs
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x)) ; Only run when using a graphical emacs
+    (exec-path-from-shell-initialize)))
