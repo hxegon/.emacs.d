@@ -208,9 +208,7 @@
   :mode
   (("\\.clj\\'" . clojure-mode)
    ("\\.edn\\'" . clojure-mode))
-  :init
-  (add-hook 'clojure-mode-hook #'show-paren-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+  :hook (show-paren-mode rainbow-delimiters-mode))
 
 ;; interactive clojure programming support
 (use-package cider
