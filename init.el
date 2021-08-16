@@ -211,17 +211,14 @@
   :config
   (cider-repl-toggle-pretty-printing))
 
-;; improved lisp editing based on cursor position
-(defun enable-lispy-mode () (lispy-mode 1))
-(use-package lispy
+(use-package parinfer-rust-mode
   :ensure t
   :defer t
-  :after clojure-mode
   :init
-  (add-hook 'clojure-mode-hook #'enable-lispy-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-lispy-mode)
-  :config
-  (define-key lispy-mode-map (kbd "`") 'common/body))
+  (setq parinfer-rust-auto-download t)
+  :hook
+  (emacs-lisp-mode
+   clojure-mode))
 
 ;; Fixes path issues present when on using a gui emacs
 (use-package exec-path-from-shell
