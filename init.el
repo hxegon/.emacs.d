@@ -123,6 +123,14 @@
   :ensure t
   :bind (("C-s" . swiper)))
 
+;; Smarter sorting algorithm for ivy
+(use-package ivy-prescient
+  :ensure t
+  :after (ivy counsel)
+  :config
+  (ivy-prescient-mode)
+  (prescient-persist-mode))
+
 ;; project based operations
 (use-package projectile
   :ensure t
