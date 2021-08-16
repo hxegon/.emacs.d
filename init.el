@@ -171,19 +171,21 @@
   :config (global-git-gutter-mode +1))
 
 ;; group sequencable commands together
-;; FIXME: this is overridden in the lispy keymap
-;; (use-package hydra
-;;   :ensure t
-;;   :config
-;;   (defhydra common (global-map "`")
-;;     "Common actions"
-;;     ("`" (lambda () (interactive) (insert "`")) "insert literal ` character and exit" :exit t)
-;;     (">" enlarge-window "enlarge window")
-;;     ("<" shrink-window "shrink window")
-;;     ("+" text-scale-increase "increase text size")
-;;     ("-" text-scale-decrease "decrease text size")
-;;     ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t)
-;;     ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t)))
+(use-package hydra
+  :ensure t
+  :config
+  (defhydra common (global-map "`")
+    "Common actions"
+    ("`" (lambda () (interactive) (insert "`")) "insert literal ` character and exit" :exit t)
+    ("." enlarge-window "enlarge window vertically" :column "GUI")
+    ("," shrink-window "shrink window vertically" :column "GUI")
+    (">" enlarge-window-horizontally "enlarge window horizontally" :column "GUI")
+    ("<" shrink-window-horizontally "shrink window horizontally" :column "GUI")
+    ("+" text-scale-increase "increase text size" :column "GUI")
+    ("-" text-scale-decrease "decrease text size" :column "GUI")
+    ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t :column "META")
+    ("C" cider-clojuredocs "Show clojuredocs" :exit t :column "LANG")
+    ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t :column "LANG")))
 
 ;; -------- Clojure support --------
 ;; syntax highlighting for .clj, .cljs, .cljc
@@ -216,7 +218,9 @@
   :after clojure-mode
   :init
   (add-hook 'clojure-mode-hook #'enable-lispy-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-lispy-mode))
+  (add-hook 'emacs-lisp-mode-hook #'enable-lispy-mode)
+  :config
+  (define-key lispy-mode-map (kbd "`") 'common/body))
 
 ;; Fixes path issues present when on using a gui emacs
 (use-package exec-path-from-shell
