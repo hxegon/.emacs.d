@@ -183,6 +183,7 @@
     ("<" shrink-window-horizontally "shrink window horizontally" :column "GUI")
     ("+" text-scale-increase "increase text size" :column "GUI")
     ("-" text-scale-decrease "decrease text size" :column "GUI")
+    ("TAB" avy-goto-word-0 "avy goto word 0" :exit t :column "NAV")
     ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t :column "META")
     ("C" cider-clojuredocs "Show clojuredocs" :exit t :column "LANG")
     ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t :column "LANG")))
