@@ -207,6 +207,7 @@
   :after rainbow-delimiters
   :mode
   (("\\.clj\\'" . clojure-mode)
+   ("\\.cljs\\'" . clojure-mode)
    ("\\.edn\\'" . clojure-mode))
   :hook (show-paren-mode rainbow-delimiters-mode))
 
