@@ -223,11 +223,9 @@
 (use-package parinfer-rust-mode
   :ensure t
   :defer t
-  :init
-  (setq parinfer-rust-auto-download t)
-  :hook
-  (emacs-lisp-mode
-   clojure-mode))
+  :after (clojure-mode)
+  :init (setq parinfer-rust-auto-download t)
+  :hook (emacs-lisp-mode clojure-mode))
 
 ;; Fixes path issues present when on using a gui emacs
 (use-package exec-path-from-shell
