@@ -250,3 +250,8 @@
   :ensure t
   :defer t
   :mode (("\\.lua\\'" . lua-mode)))
+
+(use-package yaml-mode
+  :ensure t
+  :defer t
+  :mode (("\\.yml\\'" . yaml-mode)))
