@@ -254,3 +254,12 @@
   :ensure t
   :defer t
   :mode (("\\.yml\\'" . yaml-mode)))
+
+;; Vim emulation
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)
+  (setq evil-insert-state-map (make-sparse-keymap))
+  (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-,") 'evil-normal-state))
