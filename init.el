@@ -156,15 +156,12 @@
   :init (load-theme 'zenburn t))
 
 ;; pretty status bar
-(use-package powerline
+(use-package doom-modeline
   :ensure t
-  :config (powerline-default-theme))
-
-;; EasyMotion style code navigation
-(use-package avy
-  :ensure t
-  :defer t
-  :bind (("C-;" . avy-goto-char)))
+  :after evil
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-modal-icon t))
 
 ;; Git integration
 (use-package magit
