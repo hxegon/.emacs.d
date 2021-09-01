@@ -263,3 +263,14 @@
   (setq evil-insert-state-map (make-sparse-keymap))
   (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-,") 'evil-normal-state))
+
+;; Automatic code linting
+(use-package flycheck
+  :ensure t
+  :after (exec-path-from-shell)
+  :init (global-flycheck-mode))
+
+;; Hook clojure style checker into flycheck
+(use-package flycheck-clj-kondo
+  :ensure t
+  :after (flycheck))
