@@ -139,12 +139,12 @@
   :bind (("C-x f" . projectile-find-file)
          ("C-x p" . projectile-switch-project)))
 
+;; FIXME: Getting 'exceeded lisp max nesting depth' or something with this :\
 ;; keep track of delimiter nesting through layered syntax highlighting
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode #'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode))
+;; (use-package rainbow-delimiters
+;;   :ensure t
+;;   :after (clojure-mode)
+;;   :hook ((prog-mode . rainbow-delimiters-mode)))
 
 ;; Simple dark theme
 ;; (use-package gruber-darker-theme
