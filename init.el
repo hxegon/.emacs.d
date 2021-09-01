@@ -201,12 +201,14 @@
 (use-package clojure-mode
   :ensure t
   :defer t
-  :after rainbow-delimiters
+  :after (flycheck-clj-kondo)
   :mode
   (("\\.clj\\'" . clojure-mode)
    ("\\.cljs\\'" . clojure-mode)
    ("\\.edn\\'" . clojure-mode))
-  :hook (show-paren-mode rainbow-delimiters-mode))
+  :hook (show-paren-mode)
+  :config
+  (require 'flycheck-clj-kondo))
 
 ;; interactive clojure programming support
 (use-package cider
