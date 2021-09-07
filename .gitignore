@@ -4,3 +4,4 @@ elpa/
 var/
 etc/
 custom-file.el
+parinfer-rust/
