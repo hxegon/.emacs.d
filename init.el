@@ -158,7 +158,6 @@
 ;; pretty status bar
 (use-package doom-modeline
   :ensure t
-  :after evil
   :init (doom-modeline-mode 1)
   :config
   (setq doom-modeline-modal-icon t))
@@ -254,15 +253,6 @@
   :ensure t
   :defer t
   :mode (("\\.yml\\'" . yaml-mode)))
-
-;; Vim emulation
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1)
-  (setq evil-insert-state-map (make-sparse-keymap))
-  (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-,") 'evil-normal-state))
 
 ;; Automatic code linting
 (use-package flycheck
