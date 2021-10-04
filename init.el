@@ -180,6 +180,11 @@
   :diminish git-gutter-mode
   :config (global-git-gutter-mode +1))
 
+;; Visual jump hints a la Easymotion
+(use-package avy
+  :ensure t
+  :bind (("<backtab>" . avy-goto-word-0)))
+
 ;; group sequencable commands together
 (use-package hydra
   :ensure t
@@ -270,3 +275,13 @@
 (use-package flycheck-clj-kondo
   :ensure t
   :after (flycheck))
+
+;; Magical auto completion
+(use-package company
+  :ensure t
+  :config (global-company-mode))
+
+;; Magical emacs terminal finally (shamelessly cribbed from derek passen)
+(use-package vterm
+  :ensure t
+  :defer t)
