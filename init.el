@@ -107,6 +107,8 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-virtual-abbreviate 'abbreviate
+      uniquify-min-dir-content 10)
   (setq ivy-height 10)
   (setq ivy-initial-inputs-alist nil))
 
