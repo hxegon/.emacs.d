@@ -118,7 +118,8 @@
   :after ivy
   :bind (("M-x" . counsel-M-x)
          ("C-c i" . counsel-imenu)
-         ("C-x C-r" . counsel-recentf))
+         ("C-x C-r" . counsel-recentf)
+         ("C-x /" . counsel-projectile-rg))
   :config
   (counsel-mode)
   :diminish counsel-mode)
