@@ -57,6 +57,9 @@
  ;; Immediately select help window
  help-window-select t)
 
+;; Load custom file
+(load-file "~/.emacs.d/custom-file.el")
+
 ;; Change all yes/no questions to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
