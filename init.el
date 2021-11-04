@@ -292,3 +292,22 @@
 (use-package vterm
   :ensure t
   :defer t)
+
+;; Distributed collaboration using conflict-free replicated data types
+(use-package crdt
+  :ensure t)
+
+;; Work project configuration, auto load env vars and add env switching functions
+(use-package guaranteed-emacs
+  :load-path "~/Code/beacon/guaranteed-emacs"
+  :custom (gr-source-directory "~/Code/beacon")
+  :init (use-package dash :ensure t)
+        (use-package dash-functional :ensure t)
+        (use-package ht :ensure t)
+        (use-package s :ensure t)
+  :config (gri-dev))
+
+;; Formats work clojure projects, needs manual triggering
+(use-package zprint-format
+  :ensure t
+  :defer t)
