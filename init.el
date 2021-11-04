@@ -79,6 +79,9 @@
 (global-set-key (kbd "M-[") 'backward-paragraph)
 (global-set-key (kbd "M-]") 'forward-paragraph)
 
+;; ergonomic join-line binding
+(global-set-key (kbd "C-x j") 'join-line)
+
 ;; -------- Packages --------
 
 ;; Recent buffers
