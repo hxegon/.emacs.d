@@ -75,6 +75,10 @@
 (global-hl-line-mode t)               ; highlight current line
 (line-number-mode t)                  ; add line numbers to status bar
 
+;; More vim like binding for for forward-paragraph and backward-paragraph
+(global-set-key (kbd "M-[") 'backward-paragraph)
+(global-set-key (kbd "M-]") 'forward-paragraph)
+
 ;; -------- Packages --------
 
 ;; Recent buffers
