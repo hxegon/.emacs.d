@@ -149,8 +149,13 @@
   :ensure t
   :config
   (projectile-global-mode t)
-  :bind (("C-x f" . projectile-find-file)
-         ("C-x p" . projectile-switch-project)))
+  :bind (("C-x f" . my-projectile-find-file)
+         ("C-x p" . projectile-switch-project))
+  :config (defun my-projectile-find-file () ;; open file in other window if C-u
+            (interactive)
+            (if (equal current-prefix-arg nil)
+                (projectile-find-file)
+                (projectile-find-file-other-window))))
 
 ;; FIXME: Getting 'exceeded lisp max nesting depth' or something with this :\
 ;; keep track of delimiter nesting through layered syntax highlighting
