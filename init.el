@@ -74,6 +74,9 @@
 (scroll-bar-mode -1)                  ; disable gui scrollbar
 (global-hl-line-mode t)               ; highlight current line
 (line-number-mode t)                  ; add line numbers to status bar
+(global-linum-mode)                   ; Line number gutter everywhere
+
+;; ----- ERGONOMICS -----
 
 ;; More vim like binding for for forward-paragraph and backward-paragraph
 (global-set-key (kbd "M-[") 'backward-paragraph)
