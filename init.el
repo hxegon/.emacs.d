@@ -323,3 +323,8 @@
 (use-package ace-window
   :ensure t
   :bind (("M-o" . ace-window)))
+
+;; Resize windows automatically to intelligently utilize space
+(use-package zoom
+  :ensure t
+  :config (zoom-mode))
