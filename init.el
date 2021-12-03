@@ -85,6 +85,10 @@
 ;; ergonomic join-line binding
 (global-set-key (kbd "C-x j") 'join-line)
 
+
+;; alternative to M-x
+;;(global-set-key (kbd "C-<tab>") 'counsel-M-x)
+
 ;; -------- Packages --------
 
 ;; - Theme
