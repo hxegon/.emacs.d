@@ -194,7 +194,6 @@
 ;; Visual jump hints a la Easymotion
 (use-package avy
   :ensure t
-  :bind (("<backtab>" . avy-goto-word-0)))
 
 ;; group sequencable commands together
 (use-package hydra
@@ -216,6 +215,8 @@
     ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t :column "NAV")
     ("C" cider-clojuredocs "Show clojuredocs" :exit t :column "LANG")
     ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t :column "LANG")))
+  :bind (("<backtab>" . avy-goto-word-0)
+         ("C-<tab>" . avy-goto-char-timer)))
 
 ;; -------- Clojure support --------
 ;; syntax highlighting for .clj, .cljs, .cljc
