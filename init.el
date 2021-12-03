@@ -317,11 +317,26 @@
   :ensure t
   :defer t)
 
+;; Better window navigation and swapping
 (use-package ace-window
   :ensure t
-  :bind (("M-o" . ace-window)))
+  :bind (("M-o" . ace-window))
+  :config
+  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?l)))
 
 ;; Resize windows automatically to intelligently utilize space
 (use-package zoom
   :ensure t
   :config (zoom-mode))
+
+;(use-package slime-company
+;  :after (slime company))
+
+(use-package slime
+  :ensure t
+  :defer t
+  :mode (("\\.cl\\'" . lisp-mode))
+  :init
+  (setq slime-lisp-implementations '((sbcl ("sbcl")))
+        slime-default-lisp 'sbcl)
+  :hook (lisp-mode . slime-mode))
