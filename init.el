@@ -87,6 +87,11 @@
 
 ;; -------- Packages --------
 
+;; - Theme
+(use-package gruvbox-theme
+  :ensure t
+  :config (load-theme 'gruvbox-dark-hard t))
+
 ;; Recent buffers
 (use-package recentf
   :config
@@ -166,15 +171,6 @@
 ;;   :ensure t
 ;;   :after (clojure-mode)
 ;;   :hook ((prog-mode . rainbow-delimiters-mode)))
-
-;; Simple dark theme
-;; (use-package gruber-darker-theme
-;;   :ensure t
-;;   :init (load-theme 'gruber-darker t))
-
-(use-package zenburn-theme
-  :ensure t
-  :init (load-theme 'zenburn t))
 
 ;; pretty status bar
 (use-package doom-modeline
