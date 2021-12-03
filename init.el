@@ -194,27 +194,6 @@
 ;; Visual jump hints a la Easymotion
 (use-package avy
   :ensure t
-
-;; group sequencable commands together
-(use-package hydra
-  :ensure t
-  :after (cider projectile avy)
-  :config
-  (defhydra common (global-map "`")
-    "Common actions"
-    ("`" (lambda () (interactive) (insert "`")) "insert literal ` character and exit" :exit t)
-    ("." enlarge-window "enlarge window vertically" :column "GUI")
-    ("," shrink-window "shrink window vertically" :column "GUI")
-    (">" enlarge-window-horizontally "enlarge window horizontally" :column "GUI")
-    ("<" shrink-window-horizontally "shrink window horizontally" :column "GUI")
-    ("+" text-scale-increase "increase text size" :column "GUI")
-    ("-" text-scale-decrease "decrease text size" :column "GUI")
-    ("L" linum-mode "toggle line numbers" :exit t :column "GUI")
-    ("e" projectile-run-eshell "open eshell in project root" :exit t :column "RUN")
-    ("TAB" avy-goto-word-0 "avy goto word 0" :exit t :column "NAV")
-    ("E" (lambda () (interactive) (find-file "~/.emacs.d/init.el")) "Open emacs config" :exit t :column "NAV")
-    ("C" cider-clojuredocs "Show clojuredocs" :exit t :column "LANG")
-    ("S" cider-repl-set-ns "Set cider ns to that of the current buffer" :exit t :column "LANG")))
   :bind (("<backtab>" . avy-goto-word-0)
          ("C-<tab>" . avy-goto-char-timer)))
 
