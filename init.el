@@ -226,7 +226,7 @@
   :after (flycheck-clj-kondo)
   :mode
   (("\\.clj\\'" . clojure-mode)
-   ("\\.cljs\\'" . clojure-mode)
+   ("\\.cljs\\'" . clojurescript-mode)
    ("\\.edn\\'" . clojure-mode))
   :hook (show-paren-mode)
   :config
