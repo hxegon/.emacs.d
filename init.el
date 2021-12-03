@@ -207,7 +207,6 @@
   (("\\.clj\\'" . clojure-mode)
    ("\\.cljs\\'" . clojurescript-mode)
    ("\\.edn\\'" . clojure-mode))
-  :hook (show-paren-mode)
   :config
   (require 'flycheck-clj-kondo))
 
@@ -225,8 +224,9 @@
   :ensure t
   :defer t
   :after (clojure-mode)
+  :hook (clojure-mode emacs-lisp-mode lisp-mode)
   :init (setq parinfer-rust-auto-download t)
-  :hook (emacs-lisp-mode clojure-mode))
+  :config (add-hook 'parinfer-rust-mode-hook #'show-paren-mode))
 
 ;; Fixes path issues present when on using a gui emacs
 (use-package exec-path-from-shell
