@@ -308,7 +308,7 @@
   :ensure t
   :bind (("M-o" . ace-window))
   :config
-  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?l)))
+  (setq aw-keys '(?h ?t ?n ?l ?a ?o ?e ?u)))
 
 ;; Resize windows automatically to intelligently utilize space
 (use-package zoom
