@@ -139,6 +139,7 @@
          ("C-c i" . counsel-imenu)
          ("C-x C-r" . counsel-recentf)
          ("C-x /" . counsel-projectile-rg))
+  :demand t
   :config
   (counsel-mode)
   :diminish counsel-mode)
@@ -146,12 +147,14 @@
 ;; isearch replacement using ivy
 (use-package swiper
   :ensure t
+  :demand t
   :bind (("C-s" . swiper)))
 
 ;; Smarter sorting algorithm for ivy
 (use-package ivy-prescient
   :ensure t
   :after (ivy counsel)
+  :demand t
   :config
   (ivy-prescient-mode)
   (prescient-persist-mode))
