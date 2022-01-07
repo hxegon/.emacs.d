@@ -138,7 +138,9 @@
   :bind (("M-x" . counsel-M-x)
          ("C-c i" . counsel-imenu)
          ("C-x C-r" . counsel-recentf)
-         ("C-x /" . counsel-projectile-rg))
+         ("C-x /" . counsel-projectile-rg)
+         ("C-x f" . counsel-projectile-find-file)
+         ("C-x p" . counsel-projectile-switch-project))
   :demand t
   :config
   (counsel-mode)
@@ -163,14 +165,7 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-global-mode t)
-  :bind (("C-x f" . my-projectile-find-file)
-         ("C-x p" . projectile-switch-project))
-  :config (defun my-projectile-find-file () ;; open file in other window if C-u
-            (interactive)
-            (if (equal current-prefix-arg nil)
-                (projectile-find-file)
-                (projectile-find-file-other-window))))
+  (projectile-global-mode t))
 
 ;; FIXME: Getting 'exceeded lisp max nesting depth' or something with this :\
 ;; keep track of delimiter nesting through layered syntax highlighting
