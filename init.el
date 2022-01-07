@@ -324,3 +324,6 @@
   (setq slime-lisp-implementations '((sbcl ("sbcl")))
         slime-default-lisp 'sbcl)
   :hook (lisp-mode . slime-mode))
+
+(use-package csv-mode
+  :defer t)
