@@ -308,7 +308,10 @@
 ;; Resize windows automatically to intelligently utilize space
 (use-package zoom
   :ensure t
-  :config (zoom-mode))
+  :config
+  (zoom-mode)
+  (custom-set-variables
+   '(zoom-size '(0.618 . 0.618))))
 
 ;(use-package slime-company
 ;  :after (slime company))
