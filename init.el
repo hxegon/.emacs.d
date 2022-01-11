@@ -89,6 +89,37 @@
 ;; alternative to M-x
 ;;(global-set-key (kbd "C-<tab>") 'counsel-M-x)
 
+;;; Fix for mac emacs not being able to set org timer sound b/c of dbus issue
+
+;; Terminal notifier
+;; requires 'brew install terminal-notifier'
+;; stolen from erc-notifier
+
+(defvar terminal-notifier-command (executable-find "terminal-notifier") "The path to terminal-notifier.")
+
+(defun terminal-notifier-notify (title message)
+  "Show a message with terminal-notifier-command."
+  (start-process "terminal-notifier"
+                 "terminal-notifier"
+                 terminal-notifier-command
+                 "-title" title
+                 "-message" message
+                 "-activate" "org.gnu.Emacs"))
+
+(defun my-say-something (msg)
+  (start-process "my-say-something"
+                 "my-say-something"
+                 "/usr/bin/say"
+                 msg))
+
+(defun timed-notification (time msg)
+  (interactive "sNotification when (e.g: 2 minutes, 60 seconds, 3 days): \nsMessage: ")
+  (run-at-time time nil (lambda (msg) (terminal-notifier-notify "Emacs" msg)) msg)
+  (run-at-time time nil (lambda (msg) (my-say-something (cadr (split-string msg ":")))) msg))
+
+(setq org-show-notification-handler
+      (lambda (msg) (timed-notification nil msg)))
+
 ;; -------- Packages --------
 
 ;; - Theme
