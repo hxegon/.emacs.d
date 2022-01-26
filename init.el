@@ -86,6 +86,8 @@
 ;; ergonomic join-line binding
 (global-set-key (kbd "C-x j") 'join-line)
 
+;; Binding for comment-region
+(global-set-key (kbd "C-#") 'comment-region)
 
 ;; alternative to M-x
 ;;(global-set-key (kbd "C-<tab>") 'counsel-M-x)
