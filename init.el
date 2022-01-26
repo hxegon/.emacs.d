@@ -75,6 +75,7 @@
 (global-hl-line-mode t)  ; highlight current line
 (line-number-mode t)     ; add line numbers to status bar
 (global-linum-mode)      ; Line number gutter everywhere
+(visual-line-mode t)     ; Toggles visual line mode: wraps lines and tweaks some commands accordingly
 
 ;; ----- ERGONOMICS -----
 
