@@ -164,7 +164,11 @@
   (setq ivy-virtual-abbreviate 'abbreviate
       uniquify-min-dir-content 10)
   (setq ivy-height 10)
-  (setq ivy-initial-inputs-alist nil))
+  ;; Why did I add this? what does this do?
+  (setq ivy-initial-inputs-alist nil)
+  ;; Thought this was supposed to put a delay on ivy updating the results when typing but it doesn't.
+  ;; Because it's the wrong thing or because it's broken?
+  (setq ivy-dynamic-exhibit-delay-ms 350))
 
 ;; ivy functions replicating many common helm features
 (use-package counsel
