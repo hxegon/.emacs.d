@@ -260,7 +260,9 @@
   (add-hook 'clojure-mode-hook 'cider-mode)
   :config
   (cider-repl-toggle-pretty-printing)
-  (setq cider-enrich-classpath nil))
+  (setq cider-enrich-classpath nil
+        ;; disable eldoc at point for cider in favor of lsp
+        cider-eldoc-display-for-symbol-at-point nil))
 
 (use-package parinfer-rust-mode
   :ensure t
@@ -317,7 +319,9 @@
 ;; Magical emacs terminal finally (shamelessly cribbed from derek passen)
 (use-package vterm
   :ensure t
-  :defer t)
+  :defer t
+  :bind (("C-x RET" . vterm-other-window)))
+
 
 ;; Distributed collaboration using conflict-free replicated data types
 (use-package crdt
@@ -366,3 +370,13 @@
 
 (use-package csv-mode
   :defer t)
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((clojure-mode . lsp)
+         (clojurescript-mode . lsp)
+         (clojurec-mode . lsp)))
+  ;; :config (setq gc-cons-threshold (* 100 1024 1024)
+  ;;               treemacs-space-between-root-nodes nil
+  ;;               lsp-lens-enable t
+  ;;               company-minimum-prefix-length 1))
