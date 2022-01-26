@@ -345,8 +345,6 @@
   (custom-set-variables
    '(zoom-size '(0.618 . 0.618))))
 
-;(use-package slime-company
-;  :after (slime company))
 
 (use-package slime
   :ensure t
