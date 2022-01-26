@@ -284,12 +284,6 @@
   :ensure t
   :defer t)
 
-(use-package undo-tree
-  :ensure t
-  :config (global-undo-tree-mode 1)
-  :bind (("C-z" . undo)
-         ("C-S-z" . redo)))
-
 (use-package lua-mode
   :ensure t
   :defer t
