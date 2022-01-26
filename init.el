@@ -1,4 +1,4 @@
-;; -- cribbed from: https://github.com/suvratapte/dot-emacs-dot-d/blob/e7f44d981004b44bb9ae23b6b67c421404ea6b4e/init.el#L19 --
+;;; -- initially cribbed from: https://github.com/suvratapte/dot-emacs-dot-d/blob/e7f44d981004b44bb9ae23b6b67c421404ea6b4e/init.el#L19 --
 
 ;; -------- Set up 'package' --------
 (require 'package)
@@ -69,12 +69,12 @@
 ;; Delete whitespace before a file is saved
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(tool-bar-mode -1)                    ; disable gui emacs toolbar
-(menu-bar-mode -1)                    ; disable menu bar
-(scroll-bar-mode -1)                  ; disable gui scrollbar
-(global-hl-line-mode t)               ; highlight current line
-(line-number-mode t)                  ; add line numbers to status bar
-(global-linum-mode)                   ; Line number gutter everywhere
+(tool-bar-mode -1)       ; disable gui emacs toolbar
+(menu-bar-mode -1)       ; disable menu bar
+(scroll-bar-mode -1)     ; disable gui scrollbar
+(global-hl-line-mode t)  ; highlight current line
+(line-number-mode t)     ; add line numbers to status bar
+(global-linum-mode)      ; Line number gutter everywhere
 
 ;; ----- ERGONOMICS -----
 
@@ -89,7 +89,7 @@
 ;; alternative to M-x
 ;;(global-set-key (kbd "C-<tab>") 'counsel-M-x)
 
-;;; Fix for mac emacs not being able to set org timer sound b/c of dbus issue
+;;; Fix for os x emacs not being able to set org timer sound b/c of dbus issue
 
 ;; Terminal notifier
 ;; requires 'brew install terminal-notifier'
@@ -154,6 +154,7 @@
 (use-package ivy
   :ensure t
   :diminish (ivy-mode . "")
+  :demand t
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -338,6 +339,7 @@
   (setq aw-keys '(?h ?t ?n ?l ?a ?o ?e ?u)))
 
 ;; Resize windows automatically to intelligently utilize space
+;; TODO: Add fn/binding to switch between golden ration and 50/50 ratios
 (use-package zoom
   :ensure t
   :config
