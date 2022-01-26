@@ -251,7 +251,8 @@
   :init
   (add-hook 'clojure-mode-hook 'cider-mode)
   :config
-  (cider-repl-toggle-pretty-printing))
+  (cider-repl-toggle-pretty-printing)
+  (setq cider-enrich-classpath nil))
 
 (use-package parinfer-rust-mode
   :ensure t
