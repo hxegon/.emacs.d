@@ -176,6 +176,7 @@
   :after ivy
   :bind (("M-x" . counsel-M-x)
          ("C-c i" . counsel-imenu)
+         ("C-c f" . counsel-flycheck)
          ("C-x C-r" . counsel-recentf)
          ("C-x /" . counsel-projectile-rg)
          ("C-x f" . counsel-projectile-find-file)
@@ -235,8 +236,10 @@
 ;; Visual jump hints a la Easymotion
 (use-package avy
   :ensure t
-  :bind (("<backtab>" . avy-goto-word-0)
-         ("C-<tab>" . avy-goto-char-timer)))
+  :bind (("<backtab>" . avy-goto-line)
+         ("C-<tab>" . avy-goto-char-timer)
+         ("C-_" . avy-goto-line)
+         ("M-_" . avy-goto-char-in-line)))
 
 ;; -------- Clojure support --------
 ;; syntax highlighting for .clj, .cljs, .cljc
