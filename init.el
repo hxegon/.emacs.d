@@ -355,16 +355,6 @@
   (custom-set-variables
    '(zoom-size '(0.618 . 0.618))))
 
-
-(use-package slime
-  :ensure t
-  :defer t
-  :mode (("\\.cl\\'" . lisp-mode))
-  :init
-  (setq slime-lisp-implementations '((sbcl ("sbcl")))
-        slime-default-lisp 'sbcl)
-  :hook (lisp-mode . slime-mode))
-
 (use-package csv-mode
   :defer t)
 
