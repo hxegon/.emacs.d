@@ -367,3 +367,38 @@
   ;;               treemacs-space-between-root-nodes nil
   ;;               lsp-lens-enable t
   ;;               company-minimum-prefix-length 1))
+
+;; TODO change minibuffer esc key to mimic C-g
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-search-module 'evil-search ; better search mode than default
+        evil-ex-complete-emacs-commands nil ; don't complete for emacs commands in ex-mode
+        ; evil-shift-round nil
+        ;; v dwis. Temporary measure until my evil-stuff is more polished
+        evil-disable-insert-state-bindings t)
+  :config
+  (evil-mode 1)
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-define-key 'normal 'global
+    "L" 'evil-last-non-blank
+    "H" 'evil-first-non-blank
+    "Y" "y$"
+    "Q" "@q"
+    (kbd "<leader>l") 'avy-goto-line ; quick line jumping
+    (kbd "<leader>SPC") 'avy-goto-char-2 ; basically vim snipe
+    (kbd "<leader>\\") 'evil-ex-nohighlight ; clear highlighting from / searches
+    (kbd "<leader>F") 'counsel-flycheck) ; show errors/warnings in a search minibuffer
+  ;; Better visual indication of mode (at where I'm actually looking when editing)
+  (setq evil-insert-state-cursor '((bar . 2) "red")
+        evil-normal-state-cursor '(box "green")
+        evil-visual-state-cursor '(box "yellow")))
+
+(use-package evil-surround
+  :ensure t
+  :after (evil)
+  :config (global-evil-surround-mode 1))
+
+;; snipe, evil-leader can be replicated with avy and evil-set-leader, respectively.
+;; at least for the mv use case
+;; (use-package evil-commentary)
