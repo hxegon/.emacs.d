@@ -342,7 +342,8 @@
   :ensure t
   :bind (("M-o" . ace-window))
   :config
-  (setq aw-keys '(?h ?t ?n ?l ?a ?o ?e ?u)))
+  (setq aw-keys '(?h ?t ?n ?l ?a ?o ?e ?u))
+  (ace-window-display-mode 1))
 
 ;; Resize windows automatically to intelligently utilize space
 ;; TODO: Add fn/binding to switch between golden ration and 50/50 ratios
