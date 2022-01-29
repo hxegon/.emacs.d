@@ -125,10 +125,9 @@
 
 ;; -------- Packages --------
 
-;; - Theme
-(use-package gruvbox-theme
+(use-package doom-themes
   :ensure t
-  :config (load-theme 'gruvbox-dark-hard t))
+  :init (load-theme 'doom-gruvbox t))
 
 ;; Recent buffers
 (use-package recentf
@@ -207,12 +206,9 @@
   :config
   (projectile-global-mode t))
 
-;; FIXME: Getting 'exceeded lisp max nesting depth' or something with this :\
-;; keep track of delimiter nesting through layered syntax highlighting
-;; (use-package rainbow-delimiters
-;;   :ensure t
-;;   :after (clojure-mode)
-;;   :hook ((prog-mode . rainbow-delimiters-mode)))
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; pretty status bar
 (use-package doom-modeline
@@ -369,6 +365,7 @@
   ;;               company-minimum-prefix-length 1))
 
 ;; TODO change minibuffer esc key to mimic C-g
+;; TODO change <leader>b to be prefix: bb for counsel B for Ibuffer, d/k for delete/kill
 (use-package evil
   :ensure t
   :init
@@ -379,16 +376,22 @@
         evil-disable-insert-state-bindings t)
   :config
   (evil-mode 1)
-  (evil-set-leader 'normal (kbd "SPC"))
-  (evil-define-key 'normal 'global
+  (evil-set-leader `(normal visual) (kbd "SPC"))
+  (evil-define-key `(normal visual) 'global
     "L" 'evil-last-non-blank
     "H" 'evil-first-non-blank
     "Y" "y$"
     "Q" "@q"
-    (kbd "<leader>l") 'avy-goto-line ; quick line jumping
-    (kbd "<leader>SPC") 'avy-goto-char-2 ; basically vim snipe
+    (kbd "<leader>l") 'avy-goto-line        ; quick line jumping
+    (kbd "<leader>.") 'avy-goto-char-2      ; basically vim snipe
     (kbd "<leader>\\") 'evil-ex-nohighlight ; clear highlighting from / searches
-    (kbd "<leader>F") 'counsel-flycheck) ; show errors/warnings in a search minibuffer
+    (kbd "<leader>F") 'counsel-flycheck     ; show errors/warnings in a search minibuffer
+    (kbd "<leader>A") 'align-regexp         ; region by regular expresion
+    (kbd "<leader>o") 'ace-window           ; change windows with hints
+    (kbd "<leader>b") 'ivy-switch-buffer    ; ivy change buffer menu
+    (kbd "<leader>x") 'counsel-M-x          ; better m-x
+    (kbd "<leader>SPC") 'save-buffer        ; quick save shortcut
+    (kbd "<leader>y") 'counsel-yank-pop)    ; paste from a search menu of recent kills
   ;; Better visual indication of mode (at where I'm actually looking when editing)
   (setq evil-insert-state-cursor '((bar . 2) "red")
         evil-normal-state-cursor '(box "green")
