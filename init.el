@@ -123,6 +123,8 @@
 (setq org-show-notification-handler
       (lambda (msg) (timed-notification nil msg)))
 
+(add-hook 'prog-mode-hook 'show-paren-mode)
+
 ;; -------- Packages --------
 
 (use-package doom-themes
