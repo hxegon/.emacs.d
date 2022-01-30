@@ -401,6 +401,8 @@
     (kbd "<leader>x") 'counsel-M-x          ; better m-x
     (kbd "<leader>SPC") 'save-buffer        ; quick save shortcut
     (kbd "<leader>y") 'counsel-yank-pop)    ; paste from a search menu of recent kills
+    (kbd "<leader>y") 'counsel-yank-pop     ; paste from a search menu of recent kills
+    (kbd "<leader>t") 'vterm-other-window)  ; open terminal in other window
   ;; Better visual indication of mode (at where I'm actually looking when editing)
   (setq evil-insert-state-cursor '((bar . 2) "red")
         evil-normal-state-cursor '(box "green")
