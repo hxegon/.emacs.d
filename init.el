@@ -380,7 +380,7 @@
   :init
   (setq evil-search-module 'evil-search ; better search mode than default
         evil-ex-complete-emacs-commands nil ; don't complete for emacs commands in ex-mode
-        ; evil-shift-round nil
+        evil-want-keybinding nil            ; disable default evil bindings for non prog/text modes (needed for evil-collection)
         ;; v dwis. Temporary measure until my evil-stuff is more polished
         evil-disable-insert-state-bindings t)
   :config
@@ -406,11 +406,25 @@
         evil-normal-state-cursor '(box "green")
         evil-visual-state-cursor '(box "yellow")))
 
+;; cs"' <- change surrounding double quotes to single quotes.
 (use-package evil-surround
   :ensure t
   :after (evil)
   :config (global-evil-surround-mode 1))
 
-;; snipe, evil-leader can be replicated with avy and evil-set-leader, respectively.
-;; at least for the mv use case
-;; (use-package evil-commentary)
+;; f/t highlight unique letters in line for faster line-wise jumping
+(use-package evil-quickscope
+  :ensure t
+  :after (evil)
+  :config (global-evil-quickscope-always-mode 1))
+
+(use-package evil-commentary
+  :ensure t
+  :after (evil)
+  :config (evil-commentary-mode))
+
+(use-package evil-collection
+  :ensure t
+  :after (evil)
+  :config
+  (evil-collection-init))
