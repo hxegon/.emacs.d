@@ -69,12 +69,17 @@
 ;; Delete whitespace before a file is saved
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Enable current line highlighting for programming and text modes
+(add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'text-mode-hook #'hl-line-mode)
+
+(add-hook 'prog-mode-hook #'linum-mode)
+(add-hook 'text-mode-hook #'linum-mode)
+
 (tool-bar-mode -1)       ; disable gui emacs toolbar
 (menu-bar-mode -1)       ; disable menu bar
 (scroll-bar-mode -1)     ; disable gui scrollbar
-(global-hl-line-mode t)  ; highlight current line
 (line-number-mode t)     ; add line numbers to status bar
-(global-linum-mode)      ; Line number gutter everywhere
 (visual-line-mode t)     ; Toggles visual line mode: wraps lines and tweaks some commands accordingly
 
 ;; ----- ERGONOMICS -----
