@@ -14,7 +14,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Early packages
+;;; Early packages
+
 (use-package no-littering ; keep emacs clean
   :ensure t
   :config
@@ -22,7 +23,7 @@
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
-;;; Defaults (No packages, no custom stuff, just changing stuff from default config)
+;;; Non-package config
 
 (setq-default
  ;; Don't show default startup screen.
@@ -130,7 +131,8 @@
 
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
-;; -------- Packages --------
+
+;;; -------- Packages --------
 
 (use-package doom-themes
   :ensure t
@@ -373,12 +375,17 @@
   ;;               lsp-lens-enable t
   ;;               company-minimum-prefix-length 1))
 
-;; TODO change minibuffer esc key to mimic C-g
+;;; --- EVIL ---
+
+;; TODO investigate input lag
+;; TODO certain buffers should not be started/moved to in normal mode (e.g. vterm)
+;;      - Might be solved by evil-collection?
 ;; TODO change <leader>b to be prefix: bb for counsel B for Ibuffer, d/k for delete/kill
+;; TODO ? C-g escapes to normal mode in insert mode?
 (use-package evil
   :ensure t
   :init
-  (setq evil-search-module 'evil-search ; better search mode than default
+  (setq evil-search-module 'evil-search     ; better search mode than default
         evil-ex-complete-emacs-commands nil ; don't complete for emacs commands in ex-mode
         evil-want-keybinding nil            ; disable default evil bindings for non prog/text modes (needed for evil-collection)
         ;; v dwis. Temporary measure until my evil-stuff is more polished
@@ -387,20 +394,19 @@
   (evil-mode 1)
   (evil-set-leader `(normal visual) (kbd "SPC"))
   (evil-define-key `(normal visual) 'global
-    "L" 'evil-last-non-blank
-    "H" 'evil-first-non-blank
-    "Y" "y$"
-    "Q" "@q"
+    "L" 'evil-last-non-blank  ; faster beginning of line navigation
+    "H" 'evil-first-non-blank ; faster end of line navigation
+    "Y" "y$"                  ; Capital Y yanks to end of line
+    "Q" "@q"                  ; Q triggers macro in q register
     (kbd "<leader>l") 'avy-goto-line        ; quick line jumping
     (kbd "<leader>.") 'avy-goto-char-2      ; basically vim snipe
     (kbd "<leader>\\") 'evil-ex-nohighlight ; clear highlighting from / searches
     (kbd "<leader>F") 'counsel-flycheck     ; show errors/warnings in a search minibuffer
-    (kbd "<leader>A") 'align-regexp         ; region by regular expresion
+    (kbd "<leader>A") 'align-regexp         ; align region by regular expresion
     (kbd "<leader>o") 'ace-window           ; change windows with hints
     (kbd "<leader>b") 'ivy-switch-buffer    ; ivy change buffer menu
     (kbd "<leader>x") 'counsel-M-x          ; better m-x
     (kbd "<leader>SPC") 'save-buffer        ; quick save shortcut
-    (kbd "<leader>y") 'counsel-yank-pop)    ; paste from a search menu of recent kills
     (kbd "<leader>y") 'counsel-yank-pop     ; paste from a search menu of recent kills
     (kbd "<leader>t") 'vterm-other-window)  ; open terminal in other window
   ;; Better visual indication of mode (at where I'm actually looking when editing)
@@ -430,3 +436,8 @@
   :after (evil)
   :config
   (evil-collection-init))
+
+;; TODO Check when this is added to melpa (https://github.com/beancount/beancount-mode/issues/4)
+;; (use-package beancount
+;;   :ensure t
+;;   :mode (("\\.beancount\\'" . beancount-mode)))
