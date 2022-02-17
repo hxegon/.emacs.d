@@ -136,7 +136,13 @@
 
 (use-package doom-themes
   :ensure t
-  :init (load-theme 'doom-gruvbox t))
+  ;; :config (load-theme 'doom-zenburn))
+  :config (load-theme 'doom-flatwhite))
+
+;; TODO how to get modeline to play nice with this theme
+(use-package nano-theme
+  :ensure t)
+  ;; :config (nano-light))
 
 ;; Recent buffers
 (use-package recentf
@@ -268,9 +274,10 @@
   (add-hook 'clojure-mode-hook 'cider-mode)
   :config
   (cider-repl-toggle-pretty-printing)
-  (setq cider-enrich-classpath nil
+  (setq cider-enrich-classpath nil))
         ;; disable eldoc at point for cider in favor of lsp
-        cider-eldoc-display-for-symbol-at-point nil))
+        ;; cider-eldoc-display-for-symbol-at-point nil))
+
 
 (use-package parinfer-rust-mode
   :ensure t
@@ -366,20 +373,28 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook ((clojure-mode . lsp)
-         (clojurescript-mode . lsp)
-         (clojurec-mode . lsp))
-  :config (lsp-enable-which-key-integration t))
-  ;; :config (setq gc-cons-threshold (* 100 1024 1024)
-  ;;               treemacs-space-between-root-nodes nil
-  ;;               lsp-lens-enable t
-  ;;               company-minimum-prefix-length 1))
+  ;; Disabled until performance issues are addressed
+  ;; :hook ((clojure-mode . lsp)
+  ;;        (clojurescript-mode . lsp)
+  ;;        (clojurec-mode . lsp))
+  :config
+  (lsp-enable-which-key-integration t)
+  (setq gc-cons-threshold (* 100 1024 1024)
+        ;; treemacs-space-between-root-nodes nil
+        ;; lsp-lens-enable t
+        company-minimum-prefix-length 2))
+
+;; (use-package lsp-ui-mode
+;;   :hook (lsp-mode . lsp-ui-mode)
+;;   :custom
+;;   (lsp-ui-doc-position 'bottom))
 
 ;;; --- EVIL ---
 
 ;; TODO investigate input lag
-;; TODO certain buffers should not be started/moved to in normal mode (e.g. vterm)
-;;      - Might be solved by evil-collection?
+;; TODO investigate alternative esc/ctrl solutions. escape on "key up" event is not ideal
+;; TODO lower contrast for evil-quickscope hints
+;; TODO my-add-mode-hook (mode(s)) (hooks)
 ;; TODO change <leader>b to be prefix: bb for counsel B for Ibuffer, d/k for delete/kill
 ;; TODO ? C-g escapes to normal mode in insert mode?
 (use-package evil
@@ -437,7 +452,14 @@
   :config
   (evil-collection-init))
 
-;; TODO Check when this is added to melpa (https://github.com/beancount/beancount-mode/issues/4)
-;; (use-package beancount
-;;   :ensure t
-;;   :mode (("\\.beancount\\'" . beancount-mode)))
+(use-package ledger-mode
+  :ensure t)
+
+;; https://www.reddit.com/r/emacs/comments/sn0xrd/screenwriting_with_fountainmode_and_olivettimode/
+;; (use-package fountain-mode
+;;   :ensure t)
+;; (use-package olivetti
+;;   :ensure t)
+
+;; Org-roam mode for better note-taking (Graph style??? :)
+;; https://jethrokuan.github.io/org-roam-guide/
