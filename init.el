@@ -409,25 +409,28 @@
   (evil-mode 1)
   (evil-set-leader `(normal visual) (kbd "SPC"))
   (evil-define-key `(normal visual) 'global
-    "L" 'evil-last-non-blank  ; faster beginning of line navigation
-    "H" 'evil-first-non-blank ; faster end of line navigation
-    "Y" "y$"                  ; Capital Y yanks to end of line
-    "Q" "@q"                  ; Q triggers macro in q register
-    (kbd "<leader>l") 'avy-goto-line        ; quick line jumping
-    (kbd "<leader>.") 'avy-goto-char-2      ; basically vim snipe
-    (kbd "<leader>\\") 'evil-ex-nohighlight ; clear highlighting from / searches
-    (kbd "<leader>F") 'counsel-flycheck     ; show errors/warnings in a search minibuffer
-    (kbd "<leader>A") 'align-regexp         ; align region by regular expresion
-    (kbd "<leader>o") 'ace-window           ; change windows with hints
-    (kbd "<leader>b") 'ivy-switch-buffer    ; ivy change buffer menu
-    (kbd "<leader>x") 'counsel-M-x          ; better m-x
-    (kbd "<leader>SPC") 'save-buffer        ; quick save shortcut
-    (kbd "<leader>y") 'counsel-yank-pop     ; paste from a search menu of recent kills
-    (kbd "<leader>t") 'vterm-other-window)  ; open terminal in other window
+    "Y" "y$" ; Capital Y yanks to end of line
+    "Q" "@q" ; Q triggers macro in q register
+    "L"                 'evil-last-non-blank   ; faster beginning of line navigation
+    "H"                 'evil-first-non-blank  ; faster end of line navigation
+    (kbd "<leader>l")   'avy-goto-line         ; quick line jumping
+    (kbd "<leader>.")   'avy-goto-char-2       ; 2 char anywhere jump
+    (kbd "<leader>,")   'avy-goto-word-0       ; 0 char word jump
+    (kbd "<leader>\\")  'evil-ex-nohighlight   ; clear highlighting from / searches
+    (kbd "<leader>F")   'counsel-flycheck      ; show errors/warnings in a search minibuffer
+    (kbd "<leader>A")   'align-regexp          ; align region by regular expresion
+    (kbd "<leader>o")   'ace-window            ; change windows with hints
+    (kbd "<leader>b")   'ivy-switch-buffer     ; ivy change buffer menu
+    (kbd "<leader>x")   'counsel-M-x           ; better m-x
+    (kbd "<leader>SPC") 'save-buffer           ; quick save shortcut
+    (kbd "<leader>y")   'counsel-yank-pop      ; paste from a search menu of recent kills
+    (kbd "<leader>L")   'counsel-load-theme    ; select and load theme
+    (kbd "<leader>t")   'vterm-other-window    ; open terminal in other window
+    (kbd "<leader>T")   'projectile-run-vterm) ; open terminal in this window, at project root
   ;; Better visual indication of mode (at where I'm actually looking when editing)
   (setq evil-insert-state-cursor '((bar . 2) "red")
         evil-normal-state-cursor '(box "green")
-        evil-visual-state-cursor '(box "yellow")))
+        evil-visual-state-cursor '(box "blue")))
 
 ;; cs"' <- change surrounding double quotes to single quotes.
 (use-package evil-surround
