@@ -85,6 +85,8 @@
 
 ;; ----- ERGONOMICS -----
 
+(global-set-key (kbd "M-o") 'other-window)
+
 ;; More vim like binding for for forward-paragraph and backward-paragraph
 (global-set-key (kbd "M-[") 'backward-paragraph)
 (global-set-key (kbd "M-]") 'forward-paragraph)
@@ -104,40 +106,15 @@
 ;; requires 'brew install terminal-notifier'
 ;; stolen from erc-notifier
 
-(defvar terminal-notifier-command (executable-find "terminal-notifier") "The path to terminal-notifier.")
-
-(defun terminal-notifier-notify (title message)
-  "Show a message with terminal-notifier-command."
-  (start-process "terminal-notifier"
-                 "terminal-notifier"
-                 terminal-notifier-command
-                 "-title" title
-                 "-message" message
-                 "-activate" "org.gnu.Emacs"))
-
-(defun my-say-something (msg)
-  (start-process "my-say-something"
-                 "my-say-something"
-                 "/usr/bin/say"
-                 msg))
-
-(defun timed-notification (time msg)
-  (interactive "sNotification when (e.g: 2 minutes, 60 seconds, 3 days): \nsMessage: ")
-  (run-at-time time nil (lambda (msg) (terminal-notifier-notify "Emacs" msg)) msg)
-  (run-at-time time nil (lambda (msg) (my-say-something (cadr (split-string msg ":")))) msg))
-
-(setq org-show-notification-handler
-      (lambda (msg) (timed-notification nil msg)))
-
 (add-hook 'prog-mode-hook 'show-paren-mode)
-
 
 ;;; -------- Packages --------
 
 (use-package doom-themes
   :ensure t
   ;; :config (load-theme 'doom-zenburn))
-  :config (load-theme 'doom-flatwhite))
+  ;; :config (load-theme 'doom-flatwhite))
+  :config (load-theme 'doom-nord))
 
 ;; TODO how to get modeline to play nice with this theme
 (use-package nano-theme
@@ -187,15 +164,11 @@
 ;; ivy functions replicating many common helm features
 (use-package counsel
   :ensure t
-  :after ivy
+  :after (ivy)
   :bind (("M-x" . counsel-M-x)
          ("C-c i" . counsel-imenu)
          ("C-c f" . counsel-flycheck)
-         ("C-x C-r" . counsel-recentf)
-         ("C-x /" . counsel-projectile-rg)
-         ("C-x f" . counsel-projectile-find-file)
-         ("C-x p" . counsel-projectile-switch-project))
-  :demand t
+         ("C-x C-r" . counsel-recentf))
   :config
   (counsel-mode)
   :diminish counsel-mode)
@@ -209,7 +182,7 @@
 ;; Smarter sorting algorithm for ivy
 (use-package ivy-prescient
   :ensure t
-  :after (ivy counsel)
+  :after (ivy)
   :demand t
   :config
   (ivy-prescient-mode)
@@ -218,8 +191,15 @@
 ;; project based operations
 (use-package projectile
   :ensure t
-  :config
-  (projectile-global-mode t))
+  :config (projectile-mode))
+
+(use-package counsel-projectile
+  :ensure t
+  :defer nil
+  ;; :after (counsel projectile)
+  :bind (("C-x /" . counsel-projectile-rg)
+         ("C-x f" . counsel-projectile-find-file)
+         ("C-x p" . counsel-projectile-switch-project)))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -295,9 +275,9 @@
     (exec-path-from-shell-initialize)))
 
 ;; Package for markdown files, mostly used for syntax highlighting and org-mode style folding
-(use-package markdown-mode
-  :ensure t
-  :defer t)
+;; (use-package markdown-mode
+;;   :ensure t
+;;   :defer t)
 
 (use-package lua-mode
   :ensure t
@@ -336,16 +316,6 @@
 (use-package crdt
   :ensure t)
 
-;; Work project configuration, auto load env vars and add env switching functions
-(use-package guaranteed-emacs
-  :load-path "~/Code/beacon/guaranteed-emacs"
-  :custom (gr-source-directory "~/Code/beacon")
-  :init (use-package dash :ensure t)
-        (use-package dash-functional :ensure t)
-        (use-package ht :ensure t)
-        (use-package s :ensure t)
-  :config (gri-dev))
-
 ;; Formats work clojure projects, needs manual triggering
 (use-package zprint-format
   :ensure t
@@ -354,7 +324,7 @@
 ;; Better window navigation and swapping
 (use-package ace-window
   :ensure t
-  :bind (("M-o" . ace-window))
+  ; :bind (("M-o" . ace-window))
   :config
   (setq aw-keys '(?h ?t ?n ?l ?a ?o ?e ?u))
   (ace-window-display-mode 1))
@@ -404,7 +374,8 @@
         evil-ex-complete-emacs-commands nil ; don't complete for emacs commands in ex-mode
         evil-want-keybinding nil            ; disable default evil bindings for non prog/text modes (needed for evil-collection)
         ;; v dwis. Temporary measure until my evil-stuff is more polished
-        evil-disable-insert-state-bindings t)
+        ;; evil-disable-insert-state-bindings t)
+        )
   :config
   (evil-mode 1)
   (evil-set-leader `(normal visual) (kbd "SPC"))
@@ -414,7 +385,7 @@
     "L"                 'evil-last-non-blank   ; faster beginning of line navigation
     "H"                 'evil-first-non-blank  ; faster end of line navigation
     (kbd "<leader>l")   'avy-goto-line         ; quick line jumping
-    (kbd "<leader>.")   'avy-goto-char-2       ; 2 char anywhere jump
+    (kbd "<leader>.")   'avy-goto-char-timer   ; char jump on timer
     (kbd "<leader>,")   'avy-goto-word-0       ; 0 char word jump
     (kbd "<leader>\\")  'evil-ex-nohighlight   ; clear highlighting from / searches
     (kbd "<leader>F")   'counsel-flycheck      ; show errors/warnings in a search minibuffer
@@ -454,9 +425,6 @@
   :after (evil)
   :config
   (evil-collection-init))
-
-(use-package ledger-mode
-  :ensure t)
 
 ;; https://www.reddit.com/r/emacs/comments/sn0xrd/screenwriting_with_fountainmode_and_olivettimode/
 ;; (use-package fountain-mode
