@@ -111,15 +111,16 @@
 ;;; -------- Packages --------
 
 (use-package doom-themes
-  :ensure t
+  :ensure t)
   ;; :config (load-theme 'doom-zenburn))
   ;; :config (load-theme 'doom-flatwhite))
-  :config (load-theme 'doom-nord))
+  ;; :config (load-theme 'doom-nord))
+  ;; :config (load-theme 'doom-zenburn))
 
 ;; TODO how to get modeline to play nice with this theme
 (use-package nano-theme
-  :ensure t)
-  ;; :config (nano-light))
+  :ensure t
+  :config (nano-light))
 
 ;; Recent buffers
 (use-package recentf
@@ -204,13 +205,6 @@
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
-
-;; pretty status bar
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-modal-icon t))
 
 ;; Git integration
 (use-package magit
