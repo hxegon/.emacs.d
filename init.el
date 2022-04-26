@@ -420,6 +420,11 @@
   :config
   (evil-collection-init))
 
+;; Load vcs excluded secrets elisp file if it exists
+(let ((secrets "~/.emacs.d/secrets.el"))
+  (when (file-exists-p secrets)
+    (load-file secrets)))
+
 ;; https://www.reddit.com/r/emacs/comments/sn0xrd/screenwriting_with_fountainmode_and_olivettimode/
 ;; (use-package fountain-mode
 ;;   :ensure t)
