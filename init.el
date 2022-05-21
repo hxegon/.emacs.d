@@ -289,7 +289,7 @@
   :after (exec-path-from-shell)
   :init (global-flycheck-mode))
 
-;; Hook clojure style checker into flycheck
+;; Hook clojure linter into flycheck
 (use-package flycheck-clj-kondo
   :ensure t
   :after (flycheck))
