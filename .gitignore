@@ -1,8 +1,11 @@
 .recentf
+recentf
 backups/
 elpa/
 var/
 etc/
 custom-file.el
+custom.el
 secrets.el
 parinfer-rust/
+flycheck_init.el
