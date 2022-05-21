@@ -378,20 +378,24 @@
     "Q" "@q" ; Q triggers macro in q register
     "L"                 'evil-last-non-blank   ; faster beginning of line navigation
     "H"                 'evil-first-non-blank  ; faster end of line navigation
+    (kbd "C-y")         'evil-paste-before    ; mimic default emacs yank binding (useful for putting in swiper)
     (kbd "<leader>l")   'avy-goto-line         ; quick line jumping
     (kbd "<leader>.")   'avy-goto-char-timer   ; char jump on timer
-    (kbd "<leader>,")   'avy-goto-word-0       ; 0 char word jump
+    (kbd "<leader>'")   'avy-goto-line        ; jump to line
+    (kbd "<leader>,")   'avy-goto-symbol-1    ; 1 char symbol jump
+    ;; (kbd "<leader>SPC") '
     (kbd "<leader>\\")  'evil-ex-nohighlight   ; clear highlighting from / searches
     (kbd "<leader>F")   'counsel-flycheck      ; show errors/warnings in a search minibuffer
     (kbd "<leader>A")   'align-regexp          ; align region by regular expresion
     (kbd "<leader>o")   'ace-window            ; change windows with hints
     (kbd "<leader>b")   'ivy-switch-buffer     ; ivy change buffer menu
     (kbd "<leader>x")   'counsel-M-x           ; better m-x
-    (kbd "<leader>SPC") 'save-buffer           ; quick save shortcut
     (kbd "<leader>y")   'counsel-yank-pop      ; paste from a search menu of recent kills
     (kbd "<leader>L")   'counsel-load-theme    ; select and load theme
     (kbd "<leader>t")   'vterm-other-window    ; open terminal in other window
-    (kbd "<leader>T")   'projectile-run-vterm) ; open terminal in this window, at project root
+    (kbd "<leader>T")   'projectile-run-vterm ; open terminal in this window, at project root
+    (kbd "<leader><")   'smerge-keep-upper    ; Keep upper merge chunk
+    (kbd "<leader>>")   'smerge-keep-lower)   ; Keep lower merge chunk
   ;; Better visual indication of mode (at where I'm actually looking when editing)
   (setq evil-insert-state-cursor '((bar . 2) "red")
         evil-normal-state-cursor '(box "green")
