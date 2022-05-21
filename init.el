@@ -111,16 +111,16 @@
 ;;; -------- Packages --------
 
 (use-package doom-themes
-  :ensure t)
-  ;; :config (load-theme 'doom-zenburn))
+  :ensure t
+  :config (load-theme 'doom-dracula))
   ;; :config (load-theme 'doom-flatwhite))
   ;; :config (load-theme 'doom-nord))
   ;; :config (load-theme 'doom-zenburn))
 
 ;; TODO how to get modeline to play nice with this theme
-(use-package nano-theme
-  :ensure t
-  :config (nano-light))
+;; (use-package nano-theme
+;;   :ensure t
+;;   :config (nano-light))
 
 ;; Recent buffers
 (use-package recentf
