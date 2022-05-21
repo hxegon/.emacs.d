@@ -437,3 +437,8 @@
 
 ;; Org-roam mode for better note-taking (Graph style??? :)
 ;; https://jethrokuan.github.io/org-roam-guide/
+
+;; C-s, query string, C-c C-o to open results in buffer, wgrep and edit all at once
+(use-package wgrep
+  :ensure t
+  :config (setq wgrep-change-readonly-file t))
