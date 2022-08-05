@@ -1,7 +1,15 @@
+;;; init.el --- Cooper LeBrun
+
+;;; Commentary:
+;; fill this out
+
 ;;; -- initially cribbed from: https://github.com/suvratapte/dot-emacs-dot-d/blob/e7f44d981004b44bb9ae23b6b67c421404ea6b4e/init.el#L19 --
 
 ;; -------- Set up 'package' --------
 (require 'package)
+
+
+;;; Code:
 
 ;; add melpa to package archives.
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -355,12 +363,6 @@
 
 ;;; --- EVIL ---
 
-;; TODO investigate input lag
-;; TODO investigate alternative esc/ctrl solutions. escape on "key up" event is not ideal
-;; TODO lower contrast for evil-quickscope hints
-;; TODO my-add-mode-hook (mode(s)) (hooks)
-;; TODO change <leader>b to be prefix: bb for counsel B for Ibuffer, d/k for delete/kill
-;; TODO ? C-g escapes to normal mode in insert mode?
 (use-package evil
   :ensure t
   :init
