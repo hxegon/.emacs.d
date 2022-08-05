@@ -5,11 +5,10 @@
 
 ;;; -- initially cribbed from: https://github.com/suvratapte/dot-emacs-dot-d/blob/e7f44d981004b44bb9ae23b6b67c421404ea6b4e/init.el#L19 --
 
-;; -------- Set up 'package' --------
-(require 'package)
-
-
 ;;; Code:
+
+;; -------- Prelude --------
+(require 'package)
 
 ;; add melpa to package archives.
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -24,6 +23,7 @@
 
 ;;; Early packages
 
+;; does this work?
 (use-package no-littering ; keep emacs clean
   :ensure t
   :config
@@ -31,7 +31,7 @@
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
-;;; Non-package config
+;;; initial emacs config
 
 (setq-default
  ;; Don't show default startup screen.
