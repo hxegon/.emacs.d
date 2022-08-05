@@ -64,7 +64,10 @@
  scroll-margin 10
 
  ;; Immediately select help window
- help-window-select t)
+ help-window-select t
+
+ ;; Change elisp indentation offset from default of 4 -> 2
+ lisp-indent-offset 2)
 
 ;; Load custom file
 (load-file "~/.emacs.d/custom-file.el")
