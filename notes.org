@@ -1,0 +1,93 @@
+* Commit conventions
+Commit message should be based on date updates with further detail in commit description
+
+_TODOS_
+* Priorites
+** TODO High (TODAY, RIGHT NOW)
+- [ ] Hot path ergonomics
+- [ ] File backup and restore
+- [ ] clojure hydra, even if not context aware
+- [ ] unfuck indentation and autocomplete
+- [ ] COMMIT AND SAVE
+** Medium
+- [ ] normal text autocomplete that isn't spelling corrections
+- [ ] better repeat command
+- [ ] Dash usability
+- [ ] Recent jumps?
+- [ ] Auto save .emacs.d and work notes to dropbox or something
+- [ ] Decent org bindings
+- [ ] automatic hotpath identification
+- [ ] Custom bindings auto cheatsheet
+- [ ] All active bindings navigator. Fn name, binding, and docstring. Organized by global -> major modes -> minor modes with custom ones being hilighted. searchable
+** Low
+- [ ] per project layout manager
+- [ ] emacs-client + repl in separate window on laptop?
+- [ ] EVIL wrist slapper for repeated jjj/kkk/www etc
+
+* Emacs
+* Bindings
+** Ideas
+- [ ] designate a persistent set of buffers that all eval when you eval any one of them
+** Global
+- [ ] Save
+- [ ] files
+  - [ ] find by path
+  - [ ] find recent/buffer
+  - [ ] find in project
+- [ ] buffers
+  - [ ] delete buffer
+- [ ] bookmarks
+  - [ ] work notes
+  - [ ] emacs notes
+  - [ ] emacs config
+- [ ] dirvish
+- [ ] windows/splits
+  - [ ] jump window
+  - [ ] split vertically
+  - [ ] other split
+  - [ ] jump split
+- [ ] avy word
+** Context aware
+*** Clojure mode
+- [ ] Eval
+    - [ ] eval buffer
+    - [ ] eval top level sexp at point
+    - [ ] eval last sexp
+- [ ] repl
+    - [ ] jack in
+    - [ ] connect
+    - [ ] open repl buffer
+        - Smart?
+            - clj gossamer -> clj gossamer repl
+            - prompt for jack in/connect if no repl found
+
+* EVIL
+Define keys in package config
+- [ ] wrist slapper for repeated jjj/kkk etc
+* avy/swiper/counsel
+Integrate better with evil.
+- [ ] j/k/h/l (default normal mode), so easier nav with well sorted list and i for adding text.
+- [ ]  m for mark, x to execute default, X to choose action and execute
+* TODO Clojure
+** LSP/cider integration
+*** TODO Basic setup
+*** TODO Balance cider/lsp
+** Clojuremode hydra
+** Lispville?
+* TODO ORG
+See org hydra binding
+** Fix unergonomic evil behavior
+** Link / reference to other subheading?
+** Context aware bindings
+- [ ] C-n/C-p for next/previous heading?
+- [ ] Enter behavior
+- [ ] subsection display
+** Live notes markdown display?
+Would be really cool to have a window open on my laptop screen with subsections for work notes displayed in formatted markdown
+* TODO magit
+Some kind of reminder, lets you know when you haven't commited changes more then a week old or something
+** Context aware bindings
+* TODO Terminal
+- [ ] Change CMD-` to open hotwindow *in* emacs instead of from iterm.
+  - [ ] if both hotkeys are enabled, could use iterm outside emacs and vterm inside. Shared tmux session?
+  - [ ] Switch back and forth from/to most recent buffer, or open/switch to a split?
