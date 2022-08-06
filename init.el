@@ -534,6 +534,7 @@ _o_: ace
       ('emacs-lisp-mode (emacs-lisp-mode-hydra/body))
       ('clojure-mode (clojure-mode-hydra/body))
       ('clojurescript-mode (clojure-mode-hydra/body))
+      ('cider-repl-mode (clojure-mode-hydra/body)) ;; maybe make a specific cider repl hydra
       (t (message "No major mode hydra found"))
       )
     )
