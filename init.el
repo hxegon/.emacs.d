@@ -373,7 +373,7 @@
 
 (use-package hydra
   :ensure t
-  :after (evil avy counsel-projectile swiper clojure-mode)
+  :after (evil)
   :config
 
   (defhydra file-hydra
