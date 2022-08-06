@@ -191,6 +191,9 @@
   :demand t
   :bind (("C-s" . swiper)))
 
+(use-package ivy-hydra
+  :ensure t)
+
 ;; Smarter sorting algorithm for ivy
 (use-package ivy-prescient
   :ensure t
@@ -381,6 +384,8 @@
   :after (evil)
   :config
 
+  ;; NAV HYDRA
+
   (defhydra navigation-hydra
     (:exit t)
     "Navigation"
@@ -392,6 +397,8 @@
     ("B" #'bookmark-set "Add bookmark")
     ("d" #'dirvish "Dirvish")
     )
+
+  ;; BUFFER HYDRA
 
   (defun save-buffer-and-quit-hydra ()
     (interactive)
@@ -407,6 +414,8 @@
     ("s" #'save-buffer-and-quit-hydra "save")
     ("R" #'revert-buffer "revert" :color red)
     )
+
+  ;; WINDOW HYDRA
 
   (defhydra window-hydra
     (:color orange :exit t :hint none)
@@ -434,11 +443,11 @@ _o_: ace
     ("k" #'evil-window-up)
     ("l" #'evil-window-right)
     ("r" #'evil-window-mru)
-    ("a" #'ace-window)
+    ("o" #'ace-window)
 
     ;; delete
     ("c" #'delete-window)
-    ("o" #'delete-other-windows)
+    ("O" #'delete-other-windows)
 
     ;; split
     ("s" #'evil-window-split)
