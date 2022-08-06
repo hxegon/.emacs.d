@@ -398,17 +398,17 @@
     )
 
   (defhydra window-hydra
-    (:color orange :exit t :hint none :idle 1.0)
+    (:color orange :exit t :hint none)
 "
 Windows:
 ^Jump^        ^Move^       ^Split^          ^Delete^
 -----------------------------------------------------
 _k_: up       _K_: up      _v_: vertical    _c_: this window
-_j_: down     _J_: down    _s_: horizontal  _C_: other windows
+_j_: down     _J_: down    _s_: horizontal  _O_: other windows
 _h_: left     _H_: left
 _l_: right    _L_: right
 _r_: mru      _R_: rotate
-_o_: by-hint
+_o_: ace
 "
     ;; move
     ("H" #'evil-window-move-far-left)
@@ -423,11 +423,11 @@ _o_: by-hint
     ("k" #'evil-window-up)
     ("l" #'evil-window-right)
     ("r" #'evil-window-mru)
-    ("o" #'ace-window)
+    ("a" #'ace-window)
 
     ;; delete
     ("c" #'delete-window)
-    ("C" #'delete-other-windows)
+    ("o" #'delete-other-windows)
 
     ;; split
     ("s" #'evil-window-split)
@@ -477,8 +477,8 @@ _o_: by-hint
     (kbd "<leader>t")  'avy-goto-char-timer  ; char jump on timer
     (kbd "<leader>l")  'avy-goto-line        ; jump to line
     (kbd "<leader>-")  'avy-goto-symbol-1    ; 1 char symbol jump
-    (kbd "<leader>w")  'ace-window           ; change windows with hints
-
+    (kbd "<leader>.")  'avy-goto-char        ; 1 char jump
+    (kbd "<leader>o")  'ace-window        ; 1 char jump
     (kbd "<leader>p")  'counsel-yank-pop     ; paste from a search menu of recent kills
 
     ;; -> context
