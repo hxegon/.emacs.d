@@ -359,6 +359,11 @@
         ;; lsp-lens-enable t
         company-minimum-prefix-length 2))
 
+;; dired++
+(use-package dirvish
+  :ensure t
+  :config (dirvish-override-dired-mode))
+
 ;; (use-package lsp-ui-mode
 ;;   :hook (lsp-mode . lsp-ui-mode)
 ;;   :custom
