@@ -369,6 +369,90 @@
 ;;   :custom
 ;;   (lsp-ui-doc-position 'bottom))
 
+;; HYDRA
+
+(use-package hydra
+  :ensure t
+  :after (evil avy counsel-projectile swiper clojure-mode)
+  :config
+
+  (defhydra file-hydra
+    (:color orange :exit t)
+    "Files"
+    ("f" #'counsel-find-file "by path")
+    ("p" #'counsel-projectile-find-file "in current project")
+    ("r" #'counsel-recentf "recent")
+    ("d" #'dirvish "Dirvish")
+    ("b" #'bookmark-jump "Jump to bookmark")
+    ("B" #'bookmark-set "Add bookmark")
+    )
+
+  (defhydra buffer-hydra
+    (:color orange :exit t :columns 3)
+    "Buffers"
+    ("b" #'ivy-switch-buffer "switch")
+    ("k" #'kill-buffer "kill")
+    ("s" #'save-buffer "Save")
+    ("R" #'revert-buffer "revert")
+    ("r" #'previous-buffer "switch to mru")
+    )
+
+  (defhydra window-hydra
+    (:color orange :exit t :hint none :idle 1.0)
+"
+Windows:
+^Jump^        ^Move^       ^Split^          ^Delete^
+-----------------------------------------------------
+_k_: up       _K_: up      _v_: vertical    _c_: this window
+_j_: down     _J_: down    _s_: horizontal  _C_: other windows
+_h_: left     _H_: left
+_l_: right    _L_: right
+_r_: mru      _R_: rotate
+_o_: by-hint
+"
+    ;; move
+    ("H" #'evil-window-move-far-left)
+    ("J" #'evil-window-move-far-down)
+    ("K" #'evil-window-move-far-up)
+    ("L" #'evil-window-move-far-right)
+    ("R" #'evil-window-rotate-downwards)
+
+    ;; jump
+    ("h" #'evil-window-left)
+    ("j" #'evil-window-down)
+    ("k" #'evil-window-up)
+    ("l" #'evil-window-right)
+    ("r" #'evil-window-mru)
+    ("o" #'ace-window)
+
+    ;; delete
+    ("c" #'delete-window)
+    ("C" #'delete-other-windows)
+
+    ;; split
+    ("s" #'evil-window-split)
+    ("v" #'evil-window-vsplit)
+    )
+
+  ;; Top level hydra @ spacebar in normal and visual modes
+  (defhydra space-hydra
+    (:color red :exit t :columns 6)
+    ;; top level bindings should maybe go under leader
+    ;; Change to contextual menu,
+    ;; -> context
+    ("E" #'eval-defun "Eval current top level s-exp" :column "elisp")
+
+    ("h" #'help-command "Help" :column "menu")
+    ("f" #'file-hydra/body "Files" :column "menu")
+    ("b" #'buffer-hydra/body "Buffers" :column "menu")
+    ("w" #'window-hydra/body "Windows" :column "menu")
+    ;; ("H" #'help-command "My help command")
+    ;; sub-hydras
+  )
+  ;; add keybinding for hydra
+  (evil-define-key `(normal visual) 'global (kbd "SPC") 'space-hydra/body)
+)
+
 ;;; --- EVIL ---
 
 (use-package evil
@@ -382,30 +466,27 @@
         )
   :config
   (evil-mode 1)
-  (evil-set-leader `(normal visual) (kbd "SPC"))
+  (evil-set-leader `(normal visual) (kbd "-"))
   (evil-define-key `(normal visual) 'global
-    "Y" "y$" ; Capital Y yanks to end of line
-    "Q" "@q" ; Q triggers macro in q register
-    "L"                 'evil-last-non-blank   ; faster beginning of line navigation
-    "H"                 'evil-first-non-blank  ; faster end of line navigation
-    (kbd "C-y")         'evil-paste-before    ; mimic default emacs yank binding (useful for putting in swiper)
-    (kbd "<leader>l")   'avy-goto-line         ; quick line jumping
-    (kbd "<leader>.")   'avy-goto-char-timer   ; char jump on timer
-    (kbd "<leader>'")   'avy-goto-line        ; jump to line
-    (kbd "<leader>,")   'avy-goto-symbol-1    ; 1 char symbol jump
-    ;; (kbd "<leader>SPC") '
-    (kbd "<leader>\\")  'evil-ex-nohighlight   ; clear highlighting from / searches
-    (kbd "<leader>F")   'counsel-flycheck      ; show errors/warnings in a search minibuffer
-    (kbd "<leader>A")   'align-regexp          ; align region by regular expresion
-    (kbd "<leader>o")   'ace-window            ; change windows with hints
-    (kbd "<leader>b")   'ivy-switch-buffer     ; ivy change buffer menu
-    (kbd "<leader>x")   'counsel-M-x           ; better m-x
-    (kbd "<leader>y")   'counsel-yank-pop      ; paste from a search menu of recent kills
-    (kbd "<leader>L")   'counsel-load-theme    ; select and load theme
-    (kbd "<leader>t")   'vterm-other-window    ; open terminal in other window
-    (kbd "<leader>T")   'projectile-run-vterm ; open terminal in this window, at project root
-    (kbd "<leader><")   'smerge-keep-upper    ; Keep upper merge chunk
-    (kbd "<leader>>")   'smerge-keep-lower)   ; Keep lower merge chunk
+    "Y" "y$"                                 ; Capital Y yanks to end of line
+    "Q" "@q"                                 ; Q triggers macro in q register
+    "L"                'evil-last-non-blank  ; faster beginning of line navigation
+    "H"                'evil-first-non-blank ; faster end of line navigation
+    (kbd "C-y")        'evil-paste-before    ; mimic default emacs yank binding (useful for putting in swiper)
+
+    (kbd "<leader>t")  'avy-goto-char-timer  ; char jump on timer
+    (kbd "<leader>l")  'avy-goto-line        ; jump to line
+    (kbd "<leader>-")  'avy-goto-symbol-1    ; 1 char symbol jump
+    (kbd "<leader>w")  'ace-window           ; change windows with hints
+
+    (kbd "<leader>p")  'counsel-yank-pop     ; paste from a search menu of recent kills
+
+    ;; -> context
+    (kbd "<leader>F")  'counsel-flycheck     ; show errors/warnings in a search minibuffer
+    ;; -> formatting hydra
+    (kbd "<leader>A")  'align-regexp         ; align region by regular expresion
+    (kbd "<leader>/")  'evil-ex-nohighlight  ; clear highlighting from / searches
+  )
   ;; Better visual indication of mode (at where I'm actually looking when editing)
   (setq evil-insert-state-cursor '((bar . 2) "red")
         evil-normal-state-cursor '(box "green")
