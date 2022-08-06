@@ -440,6 +440,13 @@ _o_: ace
     ("v" #'evil-window-vsplit)
     )
 
+  (defhydra magit-hydra
+    (:color green :exit t)
+    "Magit"
+    ;; Open file on github
+    ;; Open repo on github
+    ("g" #'magit-status "status"))
+
   ;; Top level hydra @ spacebar in normal and visual modes
   (defhydra space-hydra
     (:color red :exit t)
@@ -447,6 +454,7 @@ _o_: ace
     ("n" #'navigation-hydra/body "Navigation")
     ("b" #'buffer-hydra/body "Buffer")
     ("w" #'window-hydra/body "Windows")
+    ("g" #'magit-hydra/body "Magit")
     ;; ("H" #'help-command "My help command")
     ;; sub-hydras
   )
