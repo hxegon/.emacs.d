@@ -636,3 +636,6 @@ _o_: ace
 (use-package wgrep
   :ensure t
   :config (setq wgrep-change-readonly-file t))
+
+;; Grab consul token for comcast from normal zsh env
+(setenv "CONSUL_TOKEN" (shell-command-to-string ". ~/.zshrc; echo -n $CONSUL_TOKEN"))
