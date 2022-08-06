@@ -376,25 +376,31 @@
   :after (evil)
   :config
 
-  (defhydra file-hydra
-    (:color orange :exit t)
-    "Files"
-    ("f" #'counsel-find-file "by path")
-    ("p" #'counsel-projectile-find-file "in current project")
-    ("r" #'counsel-recentf "recent")
-    ("d" #'dirvish "Dirvish")
+  (defhydra navigation-hydra
+    (:exit t)
+    "Navigation"
+    ("f" #'counsel-find-file "find file by path")
+    ("p" #'counsel-projectile-find-file "f/b in current project")
+    ("P" #'counsel-projectile-switch-project "Switch project")
+    ("r" #'counsel-recentf "recent files")
     ("b" #'bookmark-jump "Jump to bookmark")
     ("B" #'bookmark-set "Add bookmark")
+    ("d" #'dirvish "Dirvish")
     )
 
+  (defun save-buffer-and-quit-hydra ()
+    (interactive)
+    (save-buffer)
+    (hydra-keyboard-quit))
+
   (defhydra buffer-hydra
-    (:color orange :exit t :columns 3)
-    "Buffers"
+    (:color blue :exit t)
     ("b" #'ivy-switch-buffer "switch")
-    ("k" #'kill-buffer "kill")
-    ("s" #'save-buffer "Save")
-    ("R" #'revert-buffer "revert")
-    ("r" #'previous-buffer "switch to mru")
+    ("l" #'evil-switch-to-windows-last-buffer "window's last buffer")
+    ("B" #'ibuffer "ibuffer")
+    ("k" #'kill-buffer "kill" :color red)
+    ("s" #'save-buffer-and-quit-hydra "save")
+    ("R" #'revert-buffer "revert" :color red)
     )
 
   (defhydra window-hydra
@@ -436,16 +442,11 @@ _o_: ace
 
   ;; Top level hydra @ spacebar in normal and visual modes
   (defhydra space-hydra
-    (:color red :exit t :columns 6)
-    ;; top level bindings should maybe go under leader
-    ;; Change to contextual menu,
-    ;; -> context
-    ("E" #'eval-defun "Eval current top level s-exp" :column "elisp")
-
-    ("h" #'help-command "Help" :column "menu")
-    ("f" #'file-hydra/body "Files" :column "menu")
-    ("b" #'buffer-hydra/body "Buffers" :column "menu")
-    ("w" #'window-hydra/body "Windows" :column "menu")
+    (:color red :exit t)
+    ("SPC" #'counsel-M-x "M-x")
+    ("n" #'navigation-hydra/body "Navigation")
+    ("b" #'buffer-hydra/body "Buffer")
+    ("w" #'window-hydra/body "Windows")
     ;; ("H" #'help-command "My help command")
     ;; sub-hydras
   )
