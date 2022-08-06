@@ -264,7 +264,6 @@
   :init
   (add-hook 'clojure-mode-hook 'cider-mode)
   :config
-  (cider-repl-toggle-pretty-printing)
   (setq
     cider-enrich-classpath nil
     cider-prompt-for-symbol 't))
