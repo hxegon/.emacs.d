@@ -388,14 +388,13 @@
 
   (defhydra navigation-hydra
     (:exit t)
-    "Navigation"
-    ("f" #'counsel-find-file "find file by path")
-    ("p" #'counsel-projectile-find-file "f/b in current project")
-    ("P" #'counsel-projectile-switch-project "Switch project")
-    ("r" #'counsel-recentf "recent files")
-    ("b" #'bookmark-jump "Jump to bookmark")
-    ("B" #'bookmark-set "Add bookmark")
-    ("d" #'dirvish "Dirvish")
+    ("p" #'counsel-projectile-find-file "f/b in current project" :column "Project")
+    ("P" #'counsel-projectile-switch-project "Switch project" :column "Project")
+    ("r" #'counsel-recentf "recent files" :column "File")
+    ("f" #'counsel-find-file "find file by path" :column "File")
+    ("b" #'bookmark-jump "Jump to bookmark" :column "Bookmark")
+    ("B" #'bookmark-set "Add bookmark" :column "Bookmark")
+    ("d" #'dirvish "Dirvish" :column "Directory")
     )
 
   ;; BUFFER HYDRA
@@ -465,23 +464,25 @@ _o_: ace
   (defhydra magit-hydra
     (:color green :post (quit-windows-on "*git-gutter:diff*"))
     "Magit"
-    ("g" #'magit-status "Status" :exit t)
 
-    ("U" #'magit-unstage-all "unstage all files" :column "Repo" :exit t)
-    ("S" #'magit-stage-all "unstage all files" :column "Repo" :exit t)
+    ("g" #'magit-status "Status" :exit t :column "Repo")
     ("C" #'magit-commit "Commit" :column "Repo")
-    ("B" #'browse-repo "open in github" :column "Repo" :exit t)
+    ("P" #'magit-push "Push" :column "Repo" :exit t)
+    ("F" #'magit-pull "Pull" :column "Repo" :exit t)
+    ("U" #'magit-unstage-all "unstage all files" :column "Repo" :exit t)
+    ("S" #'magit-stage-all "stage all files" :column "Repo" :exit t)
 
-    ("f" #'magit-stage-file "stage file" :column "File")
-    ("b" #'browse-at-remote "open at point in github" :column "File" :exit t)
+    ("f" #'magit-stage-file "stage file" :column "In File")
 
-    ("n" #'git-gutter:next-hunk "Jump to next hunk" :column "Hunk")
-    ("p" #'git-gutter:previous-hunk "Jump to previous hunk" :column "Hunk")
-    ("d" #'git-gutter:popup-diff "diff hunk" :column "Hunk")
-    ("s" #'git-gutter:stage-hunk "stage hunk" :column "Hunk")
-    ("u" #'git-gutter:unstage-hunk "unstage hunk" :column "Hunk")
-    ("x" #'git-gutter:revert-hunk "revert hunk" :column "Hunk")
+    ("n" #'git-gutter:next-hunk "Jump to next hunk" :column "In File")
+    ("p" #'git-gutter:previous-hunk "Jump to previous hunk" :column "In File")
+    ("d" #'git-gutter:popup-diff "diff hunk" :column "In File")
+    ("s" #'git-gutter:stage-hunk "stage hunk" :column "In File")
+    ("u" #'git-gutter:unstage-hunk "unstage hunk" :column "In File")
+    ("x" #'git-gutter:revert-hunk "revert hunk" :column "In File")
 
+    ("B" #'browse-repo "open repo in github" :column "Info" :exit t)
+    ("b" #'browse-at-remote "open at point in github" :column "Info" :exit t)
     ("G" #'git-gutter:update-all-windows "update git gutters" :column "Info")
     ("l" #'git-gutter:statistic "line stats" :column "Info")
     ("a" #'vc-annotate "annotate lines" :column "Info" :exit t)
