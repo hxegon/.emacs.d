@@ -10,13 +10,18 @@ _TODOS_
 - [ ] unfuck indentation and autocomplete
 - [ ] COMMIT AND SAVE
 ** Medium
-- [ ] normal text autocomplete that isn't spelling corrections
+- [ ] elisp formating
+  - [ ] indentation
+- [ ] better aligning
+- [ ] Separate/organize hydras
+- [ ] Organize use-package statements into separate files
 - [ ] better repeat command
+- [ ] text-mode autocomplete that isn't spelling corrections
+- [ ] Auto save .emacs.d and work notes to dropbox or something
+- [ ] automatic hotpath identification
 - [ ] Dash usability
 - [ ] Recent jumps?
-- [ ] Auto save .emacs.d and work notes to dropbox or something
 - [ ] Decent org bindings
-- [ ] automatic hotpath identification
 - [ ] Custom bindings auto cheatsheet
 - [ ] All active bindings navigator. Fn name, binding, and docstring. Organized by global -> major modes -> minor modes with custom ones being hilighted. searchable
 ** Low
@@ -25,28 +30,33 @@ _TODOS_
 - [ ] EVIL wrist slapper for repeated jjj/kkk/www etc
 
 * Emacs
+
 * Bindings
 ** Ideas
 - [ ] designate a persistent set of buffers that all eval when you eval any one of them
 ** Global
-- [ ] Save
-- [ ] files
-  - [ ] find by path
-  - [ ] find recent/buffer
-  - [ ] find in project
-- [ ] buffers
-  - [ ] delete buffer
-- [ ] bookmarks
-  - [ ] work notes
-  - [ ] emacs notes
-  - [ ] emacs config
-- [ ] dirvish
-- [ ] windows/splits
-  - [ ] jump window
-  - [ ] split vertically
-  - [ ] other split
-  - [ ] jump split
-- [ ] avy word
+- [x] Save
+- [x] avy word
+- [x] files
+  - [x] find by path
+  - [x] find recent/buffer
+  - [x] find in project
+- [x] buffers
+  - [x] delete buffer
+- [x] bookmarks
+  - [x] work notes
+  - [x] emacs notes
+  - [x] emacs config
+- [x] dirvish
+- [x] windows/splits
+  - [x] jump window
+  - [x] split vertically
+  - [x] other split
+  - [x] jump split
+- [ ] formatting
+- [ ] Evil
+  - [ ] Mark interaction
+  - [ ] macro interaction
 ** Context aware
 *** Clojure mode
 - [ ] Eval
@@ -61,6 +71,7 @@ _TODOS_
             - clj gossamer -> clj gossamer repl
             - prompt for jack in/connect if no repl found
 
+
 * EVIL
 Define keys in package config
 - [ ] wrist slapper for repeated jjj/kkk etc
@@ -68,13 +79,15 @@ Define keys in package config
 Integrate better with evil.
 - [ ] j/k/h/l (default normal mode), so easier nav with well sorted list and i for adding text.
 - [ ]  m for mark, x to execute default, X to choose action and execute
-* TODO Clojure
-** LSP/cider integration
+
+* Clojure
+** TODO LSP/cider integration
 *** TODO Basic setup
 *** TODO Balance cider/lsp
 ** Clojuremode hydra
 ** Lispville?
-* TODO ORG
+
+* ORG
 See org hydra binding
 ** Fix unergonomic evil behavior
 ** Link / reference to other subheading?
