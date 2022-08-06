@@ -223,6 +223,9 @@
   :defer t
   :bind (("C-x g" . magit-status)))
 
+(use-package browse-at-remote
+  :ensure t)
+
 ;; Show changed lines on the left
 (use-package git-gutter-fringe
   :ensure t
@@ -442,12 +445,48 @@ _o_: ace
     ("v" #'evil-window-vsplit)
     )
 
+  ;; MAGIT HYDRA
+
+  (defun browse-repo ()
+    (interactive)
+    (-> (projectile-acquire-root)
+        browse-at-remote--file-url
+        browse-url))
+
   (defhydra magit-hydra
-    (:color green :exit t)
+    (:color green :post (quit-windows-on "*git-gutter:diff*"))
     "Magit"
-    ;; Open file on github
-    ;; Open repo on github
-    ("g" #'magit-status "status"))
+    ("g" #'magit-status "Status" :exit t)
+
+    ("U" #'magit-unstage-all "unstage all files" :column "Repo" :exit t)
+    ("S" #'magit-stage-all "unstage all files" :column "Repo" :exit t)
+    ("C" #'magit-commit "Commit" :column "Repo")
+    ("B" #'browse-repo "open in github" :column "Repo" :exit t)
+
+    ("f" #'magit-stage-file "stage file" :column "File")
+    ("b" #'browse-at-remote "open at point in github" :column "File" :exit t)
+
+    ("n" #'git-gutter:next-hunk "Jump to next hunk" :column "Hunk")
+    ("p" #'git-gutter:previous-hunk "Jump to previous hunk" :column "Hunk")
+    ("d" #'git-gutter:popup-diff "diff hunk" :column "Hunk")
+    ("s" #'git-gutter:stage-hunk "stage hunk" :column "Hunk")
+    ("u" #'git-gutter:unstage-hunk "unstage hunk" :column "Hunk")
+    ("x" #'git-gutter:revert-hunk "revert hunk" :column "Hunk")
+
+    ("G" #'git-gutter:update-all-windows "update git gutters" :column "Info")
+    ("l" #'git-gutter:statistic "line stats" :column "Info")
+    ("a" #'vc-annotate "annotate lines" :column "Info" :exit t)
+
+    ("q" #'hydra-keyboard-quit "exit hydra" :column "Hydra" :exit t)
+    )
+
+  (defun magit-hydra-if-repo ()
+    (interactive)
+    (if (magit-git-repo-p (projectile-acquire-root))
+      (magit-hydra/body)
+      (message "No git repo detected! Aborting magit-hydra!")))
+
+  ;; MAJOR MODE HYDRA
 
   (defhydra emacs-lisp-mode-hydra
     (:exit t)
@@ -488,6 +527,8 @@ _o_: ace
       )
     )
 
+  ;; SPACE HYDRA
+
   ;; Top level hydra @ spacebar in normal and visual modes
   (defhydra space-hydra
     (:color red :exit t)
@@ -495,7 +536,7 @@ _o_: ace
     ("n" #'navigation-hydra/body "Navigation")
     ("b" #'buffer-hydra/body "Buffer")
     ("w" #'window-hydra/body "Windows")
-    ("g" #'magit-hydra/body "Magit")
+    ("g" #'magit-hydra-if-repo "Magit")
     ;; ("H" #'help-command "My help command")
     ;; sub-hydras
   )

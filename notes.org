@@ -4,7 +4,7 @@ Commit message should be based on date updates with further detail in commit des
 _TODOS_
 * Priorites
 ** TODO High (TODAY, RIGHT NOW)
-- [ ] Hot path ergonomics
+- [x] Hot path ergonomics
 - [ ] File backup and restore
 - [ ] clojure hydra, even if not context aware
 - [ ] unfuck indentation and autocomplete
@@ -97,9 +97,12 @@ See org hydra binding
 - [ ] subsection display
 ** Live notes markdown display?
 Would be really cool to have a window open on my laptop screen with subsections for work notes displayed in formatted markdown
-* TODO magit
+
+
+* DONE git
 Some kind of reminder, lets you know when you haven't commited changes more then a week old or something
 ** Context aware bindings
+
 * TODO Terminal
 - [ ] Change CMD-` to open hotwindow *in* emacs instead of from iterm.
   - [ ] if both hotkeys are enabled, could use iterm outside emacs and vterm inside. Shared tmux session?
