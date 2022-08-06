@@ -356,16 +356,18 @@
 
 (use-package lsp-mode
   :ensure t
-  ;; Disabled until performance issues are addressed
-  ;; :hook ((clojure-mode . lsp)
-  ;;        (clojurescript-mode . lsp)
-  ;;        (clojurec-mode . lsp))
+  :hook ((clojure-mode . lsp)
+         (clojurescript-mode . lsp)
+         (clojurec-mode . lsp))
   :config
   (lsp-enable-which-key-integration t)
-  (setq gc-cons-threshold (* 100 1024 1024)
-        ;; treemacs-space-between-root-nodes nil
-        ;; lsp-lens-enable t
-        company-minimum-prefix-length 2))
+  (setq
+    gc-cons-threshold (* 100 1024 1024)
+    read-process-output-max (* 1024 1024)
+    treemacs-space-bewteen-root-nodes nil ; don't have treemacs
+    lsp-lens-enable t
+    lsp-signature-auto-activate nil
+    company-minimum-prefix-length 1))
 
 ;; dired++
 (use-package dirvish
