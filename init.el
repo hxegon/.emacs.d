@@ -455,7 +455,7 @@ _o_: ace
     ("v" #'evil-window-vsplit)
     )
 
-  ;; MAGIT HYDRA
+  ;; GIT HYDRA
 
   (defun browse-repo ()
     (interactive)
@@ -463,7 +463,7 @@ _o_: ace
         browse-at-remote--file-url
         browse-url))
 
-  (defhydra magit-hydra
+  (defhydra git-hydra
     (:color green :post (quit-windows-on "*git-gutter:diff*"))
     "Magit"
 
@@ -492,10 +492,10 @@ _o_: ace
     ("q" #'hydra-keyboard-quit "exit hydra" :column "Hydra" :exit t)
     )
 
-  (defun magit-hydra-if-repo ()
+  (defun git-hydra-if-repo ()
     (interactive)
-    (if (magit-git-repo-p (projectile-acquire-root))
-      (magit-hydra/body)
+    (if (vc-root-dir)
+      (git-hydra/body)
       (message "No git repo detected! Aborting magit-hydra!")))
 
   ;; MAJOR MODE HYDRA
@@ -548,7 +548,7 @@ _o_: ace
     ("n" #'navigation-hydra/body "Navigation")
     ("b" #'buffer-hydra/body "Buffer")
     ("w" #'window-hydra/body "Windows")
-    ("g" #'magit-hydra-if-repo "Magit")
+    ("g" #'git-hydra-if-repo "Magit")
     ;; ("H" #'help-command "My help command")
     ;; sub-hydras
   )
