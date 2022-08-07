@@ -270,15 +270,6 @@
         ;; disable eldoc at point for cider in favor of lsp
         ;; cider-eldoc-display-for-symbol-at-point nil))
 
-
-(use-package parinfer-rust-mode
-  :ensure t
-  :defer t
-  :after (clojure-mode)
-  :hook (clojure-mode emacs-lisp-mode lisp-mode)
-  :init (setq parinfer-rust-auto-download t)
-  :config (add-hook 'parinfer-rust-mode-hook #'show-paren-mode))
-
 ;; Fixes path issues present when on using a gui emacs
 (use-package exec-path-from-shell
   :ensure t
@@ -344,12 +335,12 @@
 
 ;; Resize windows automatically to intelligently utilize space
 ;; TODO: Add fn/binding to switch between golden ration and 50/50 ratios
-(use-package zoom
-  :ensure t
-  :config
-  (zoom-mode)
-  (custom-set-variables
-   '(zoom-size '(0.618 . 0.618))))
+;; (use-package zoom
+;;   :ensure t
+;;   :config
+;;   (zoom-mode)
+;;   (custom-set-variables
+;;    '(zoom-size '(0.618 . 0.618))))
 
 (use-package csv-mode
   :defer t)
