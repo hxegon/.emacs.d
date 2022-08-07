@@ -590,6 +590,55 @@ _w_: ace      _R_: rotate
         evil-normal-state-cursor '(box "green")
         evil-visual-state-cursor '(box "blue")))
 
+;; Used by spacemacs, idk.
+;; (use-package evil-cleverparens
+;;   :ensure t
+;;   :after (evil hydra)
+;;   :hook ((emacs-lisp-mode clojure-mode) . evil-smartparens-mode)
+;;   :init
+;;   (setq
+;;     ;; Don't try to infer paren balancing when yanking. Toggle with M-T.
+;;     evil-cleverparens-complete-parens-in-yanked-region nil
+;;     evil-cleverparens-move-skip-delimiters nil)
+
+;;   :config
+;;   ;; force parenthesis balancing
+;;   (smartparens-strict-mode)
+
+;;   ;; don't try to pair single quotes in elisp
+;;   (sp-local-pair '(emacs-lisp-mode) "'" "'" :actions nil)
+
+;;   ;; ergo C-q binding. Used for inserting pair chars without cp handling it
+;;   (evil-define-key 'insert 'evil-cleverparens-mode-map
+;;     (kbd "C-'") #'evil-quoted-insert)
+
+;;   (defhydra evil-cp-hydra
+;;     (:color green)
+;;     ("k" #'evil-cp-drag-backward)
+;;     ("j" #'evil-cp-drag-forward)
+
+;;     ("b" #'evil-cp-backward-sexp)
+;;     ("B" #'evil-cp-backward-up-sexp)
+;;     ("w" #'sp-next-sexp)
+;;     ("W" #'evil-avy-goto-word-0)
+;;     ("e" #'evil-cp-forward-sexp)
+;;     ("E" #'paredit-forward-up)
+
+;;     ("H" #'paredit-backword-down)
+;;     ("L" #'paredit-forward-down)
+
+;;     ("J" #'sp-join-sexp "join pairs []|[]->[|]" :exit t)
+;;     ("X" #'sp-splice-sexp "splice pairs [[|]]->[|]" :exit t))
+;;   ("r" #'sp-raise-sexp "kill all else and unwrap" :exit t)
+
+;;   (evil-define-key '(normal visual) 'evil-cleverparens-mode-map
+;;     "-" #'evil-cp-hydra/body
+;;     ;; symbol
+;;     ;; sexp forward
+;;     ;; sexp backward
+;;     (kbd "C-y") #'evil-cp-yank-enclosing)
+;;   )
+
 ;; cs"' <- change surrounding double quotes to single quotes.
 (use-package evil-surround
   :ensure t
@@ -635,4 +684,42 @@ _w_: ace      _R_: rotate
 ;; Grab consul token for comcast from normal zsh env
 (setenv "CONSUL_TOKEN" (shell-command-to-string ". ~/.zshrc; echo -n $CONSUL_TOKEN"))
 
+;; ;; lispy doesn't execute commands correctly in normal mode, it'll act like point is before evil point rather then after
+;; ;; so as if it's on the character before normal mode point like if it's in insert mode
+;; ;; (use-package lispy
+;; ;;   :ensure t)
+;; (use-package lispy)
+;; (use-package lispyville
+;;   :ensure t
+;;   :after (evil lispy)
+;;   :hook ((emacs-lisp-mode clojure-mode) . lispyville-mode)
+;;   :init
+;;   :config
+;;   (lispyville-set-key-theme
+;;     '(lispy
+;;        operators
+;;        commentary
+;;        text-objects
+;;        slurp/barf-cp
+;;        (atom-movement t)))
+;;   (evil-define-key '(normal visual) lispyville-mode-map
+;;     "H" #'lispyville-backward-sexp
+;;     "L" #'lispyville-forward-sexp
+;;     ;; fixes
+;;     "x" #'evil-delete-char
+;;     "X" #'evil-delete-backward-char))
+
+
+;; (kbd )") #'lispy-parens
+;; completion search
+;; up/down "form"
+;; next/prev form on same level
+;; lispyville move up/down
+;; lispyville slurp/barf (</>?
+;; self insert parens
+;; major mode movement hydra instead of leader
+
+;; (lispy-mode)
+
 (use-package minimap)
+;; combine all 'switch buffer' ops to b hydra, bookmark jumping, file find, switch buffer, etc
