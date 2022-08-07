@@ -315,14 +315,15 @@
 ;; Magical auto completion
 (use-package company
   :ensure t
-  :config (global-company-mode))
+  :config
+  (global-company-mode)
+  (setq company-mode-minimum-prefix-length 1))
 
 ;; Magical emacs terminal finally (shamelessly cribbed from derek passen)
 (use-package vterm
   :ensure t
   :defer t
   :bind (("C-x RET" . vterm-other-window)))
-
 
 ;; Distributed collaboration using conflict-free replicated data types
 (use-package crdt
@@ -365,8 +366,7 @@
     read-process-output-max (* 1024 1024)
     treemacs-space-bewteen-root-nodes nil ; don't have treemacs
     lsp-lens-enable t
-    lsp-signature-auto-activate nil
-    company-minimum-prefix-length 1))
+    lsp-signature-auto-activate nil))
 
 ;; dired++
 (use-package dirvish
@@ -411,6 +411,7 @@
     ("l" #'evil-switch-to-windows-last-buffer "window's last buffer")
     ("B" #'ibuffer "ibuffer")
     ("k" #'kill-buffer "kill" :color red)
+    ("x" #'kill-current-buffer "kill current" :color red :exit t)
     ("s" #'save-buffer-and-quit-hydra "save")
     ("R" #'revert-buffer "revert" :color red)
     )
@@ -424,11 +425,10 @@ Windows:
 ^Jump^        ^Move^       ^Split^          ^Delete^
 -----------------------------------------------------
 _k_: up       _K_: up      _v_: vertical    _c_: this window
-_j_: down     _J_: down    _s_: horizontal  _O_: other windows
+_j_: down     _J_: down    _s_: horizontal  _o_: other windows
 _h_: left     _H_: left
 _l_: right    _L_: right
-_r_: mru      _R_: rotate
-_o_: ace
+_w_: ace      _R_: rotate
 "
     ;; move
     ("H" #'evil-window-move-far-left)
@@ -442,12 +442,11 @@ _o_: ace
     ("j" #'evil-window-down)
     ("k" #'evil-window-up)
     ("l" #'evil-window-right)
-    ("r" #'evil-window-mru)
-    ("o" #'ace-window)
+    ("w" #'ace-window)
 
     ;; delete
     ("c" #'delete-window)
-    ("O" #'delete-other-windows)
+    ("o" #'delete-other-windows)
 
     ;; split
     ("s" #'evil-window-split)
@@ -464,31 +463,31 @@ _o_: ace
 
   (defhydra git-hydra
     (:color green :post (quit-windows-on "*git-gutter:diff*"))
-    "Magit"
+    "Git"
 
     ("g" #'magit-status "Status" :exit t :column "Repo")
-    ("C" #'magit-commit "Commit" :column "Repo")
-    ("P" #'magit-push "Push" :column "Repo" :exit t)
     ("F" #'magit-pull "Pull" :column "Repo" :exit t)
-    ("U" #'magit-unstage-all "unstage all files" :column "Repo" :exit t)
-    ("S" #'magit-stage-all "stage all files" :column "Repo" :exit t)
+    ("c" #'magit-commit "Commit" :column "Repo")
+    ("P" #'magit-push "Push" :column "Repo" :exit t)
+    ("B" #'browse-repo "open in github" :column "Repo" :exit t)
 
-    ("f" #'magit-stage-file "stage file" :column "In File")
+    ("U" #'magit-unstage-all "unstage all files" :column "File" :exit t)
+    ("S" #'magit-stage-all "stage all files" :column "File" :exit t)
+    ("f" #'magit-stage-file "stage file" :column "File")
+    ("b" #'browse-at-remote "open in github" :column "File" :exit t)
 
-    ("n" #'git-gutter:next-hunk "Jump to next hunk" :column "In File")
-    ("p" #'git-gutter:previous-hunk "Jump to previous hunk" :column "In File")
-    ("d" #'git-gutter:popup-diff "diff hunk" :column "In File")
-    ("s" #'git-gutter:stage-hunk "stage hunk" :column "In File")
-    ("u" #'git-gutter:unstage-hunk "unstage hunk" :column "In File")
-    ("x" #'git-gutter:revert-hunk "revert hunk" :column "In File")
+    ("n" #'git-gutter:next-hunk "Jump to next" :column "Hunk")
+    ("p" #'git-gutter:previous-hunk "Jump to previous" :column "Hunk")
+    ("s" #'git-gutter:stage-hunk "stage" :column "Hunk")
+    ("u" #'git-gutter:unstage-hunk "unstage" :column "Hunk")
+    ("d" #'git-gutter:popup-diff "diff" :column "Hunk")
+    ("x" #'git-gutter:revert-hunk "revert" :column "Hunk")
 
-    ("B" #'browse-repo "open repo in github" :column "Info" :exit t)
-    ("b" #'browse-at-remote "open at point in github" :column "Info" :exit t)
     ("G" #'git-gutter:update-all-windows "update git gutters" :column "Info")
     ("l" #'git-gutter:statistic "line stats" :column "Info")
     ("a" #'vc-annotate "annotate lines" :column "Info" :exit t)
 
-    ("q" #'hydra-keyboard-quit "exit hydra" :column "Hydra" :exit t)
+    ("q" #'hydra-keyboard-quit "exit hydra" :exit t)
     )
 
   (defun git-hydra-if-repo ()
@@ -501,8 +500,9 @@ _o_: ace
 
   (defhydra emacs-lisp-mode-hydra
     (:exit t)
-    ("e" #'eval-defun "eval-defun" :column "Eval")
-    ("x" #'eval-last-sexp "eval-last-sexp" :column "Eval")
+    ("e" #'eval-defun "eval defun" :column "Eval")
+    ("x" #'eval-last-sexp "eval last sexp" :column "Eval")
+    ("b" #'eval-buffer "eval buffer" :column "Eval")
 
     ("v" #'counsel-describe-variable "describe variable" :column "Describe")
     ("f" #'counsel-describe-function "describe function" :column "Describe")
@@ -511,7 +511,7 @@ _o_: ace
 
   (defhydra clojure-mode-hydra
     (:exit t)
-    ("e" #'cider-eval-defun-at-point "eval top sexp" :column "Eval")
+    ("e" #'cider-eval-defun-at-point "eval defun (C-u to inst.)" :column "Eval")
     ("x" #'cider-eval-last-sexp "eval last sexp" :column "Eval")
     ("b" #'cider-eval-buffer "eval buffer" :column "Eval")
     ("n" #'cider-ns-reload "reload ns" :column "Eval")
@@ -554,8 +554,7 @@ _o_: ace
   )
   ;; add keybinding for hydra
   (evil-define-key `(normal visual) 'global (kbd "SPC") #'space-hydra/body)
-  (evil-define-key `(normal visual) 'global (kbd ",") 'major-mode-hydra-launcher)
-)
+  (evil-define-key `(normal visual) 'global (kbd ",") 'major-mode-hydra-launcher))
 
 ;;; --- EVIL ---
 
@@ -577,6 +576,7 @@ _o_: ace
     "L"                'evil-last-non-blank  ; faster beginning of line navigation
     "H"                'evil-first-non-blank ; faster end of line navigation
     (kbd "C-y")        'evil-paste-before    ; mimic default emacs yank binding (useful for putting in swiper)
+    (kbd "C-r")        'counsel-buffer-or-recentf    ; mimic default emacs yank binding (useful for putting in swiper)
 
     (kbd "<leader>t")  'avy-goto-char-timer  ; char jump on timer
     (kbd "<leader>l")  'avy-goto-line        ; jump to line
@@ -585,8 +585,11 @@ _o_: ace
     (kbd "<leader>o")  'ace-window        ; 1 char jump
     (kbd "<leader>p")  'counsel-yank-pop     ; paste from a search menu of recent kills
 
+    (kbd "<leader><tab>") 'minimap-mode
+
     ;; -> context
     (kbd "<leader>F")  'counsel-flycheck     ; show errors/warnings in a search minibuffer
+
     ;; -> formatting hydra
     (kbd "<leader>A")  'align-regexp         ; align region by regular expresion
     (kbd "<leader>/")  'evil-ex-nohighlight  ; clear highlighting from / searches
@@ -640,3 +643,5 @@ _o_: ace
 
 ;; Grab consul token for comcast from normal zsh env
 (setenv "CONSUL_TOKEN" (shell-command-to-string ". ~/.zshrc; echo -n $CONSUL_TOKEN"))
+
+(use-package minimap)
