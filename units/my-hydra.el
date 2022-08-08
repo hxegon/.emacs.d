@@ -22,6 +22,7 @@
   ;; BUFFER HYDRA
 
   (defhydra buffer-hydra
+    ;; Change next/previous buffer to not exit. Could also display the "buffer order or whatever"
     (:color blue :exit t :columns 3)
     ("p" #'previous-buffer "Previous buffer")
     ("n" #'next-buffer "Next buffer")
