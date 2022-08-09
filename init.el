@@ -107,20 +107,6 @@
   (custom-set-variables
    '(zoom-size '(0.6 . 0.6))))
 
-(use-package lsp-mode
-  :ensure t
-  :hook ((clojure-mode . lsp)
-         (clojurescript-mode . lsp)
-         (clojurec-mode . lsp))
-  :config
-  (lsp-enable-which-key-integration t)
-  (setq
-    gc-cons-threshold (* 100 1024 1024)
-    read-process-output-max (* 1024 1024)
-    treemacs-space-bewteen-root-nodes nil ; don't have treemacs
-    lsp-lens-enable t
-    lsp-signature-auto-activate nil))
-
 ;; (use-package lsp-ui-mode
 ;;   :hook (lsp-mode . lsp-ui-mode)
 ;;   :custom

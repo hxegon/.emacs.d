@@ -36,6 +36,19 @@
   :ensure t
   :after (flycheck))
 
+(use-package lsp-mode
+  :ensure t
+  :hook ((clojure-mode . lsp)
+         (clojurescript-mode . lsp)
+         (clojurec-mode . lsp))
+  :config
+  (lsp-enable-which-key-integration t)
+  (setq
+    gc-cons-threshold (* 100 1024 1024)
+    read-process-output-max (* 1024 1024)
+    treemacs-space-bewteen-root-nodes nil ; don't have treemacs
+    lsp-lens-enable t
+    lsp-signature-auto-activate nil))
 
 ;;; Commentary:
 (provide 'my-clojure-mode)
