@@ -151,18 +151,25 @@ _w_: ace      _R_: rotate
     ("d" #'cider-clojuredocs "clojuredocs" :column "Docs")
     ("w" #'cider-clojuredocs-web "clojuredocs in browser" :column "Docs"))
 
+  (defhydra clojure-goto-hydra
+    (:exit t)
+    ("d" #'evil-goto-definition "Goto definition"))
+
   (defhydra clojure-mode-hydra
     ;; Add "EVAL AT MARK" fn
     (:exit t)
     ("e" #'clojure-eval-hydra/body "Eval")
     ("d" #'clojure-doc-hydra/body "Documentation")
-    ("r" #'clojure-repl-hydra/body "REPL"))
+    ("r" #'clojure-repl-hydra/body "REPL")
+    ("s" #'cider-scratch "Scratch buffer")
+    ("g" #'clojure-goto-hydra/body "GoTo"))
 
   (defun major-mode-hydra-launcher ()
     (interactive)
     (cl-case major-mode
       ('emacs-lisp-mode (emacs-lisp-mode-hydra/body))
       ('clojure-mode (clojure-mode-hydra/body))
+      ('clojurec-mode (clojure-mode-hydra/body))
       ('clojurescript-mode (clojure-mode-hydra/body))
       ('cider-repl-mode (clojure-mode-hydra/body)) ;; maybe make a specific cider repl hydra
       (t (message "No major mode hydra found"))))
