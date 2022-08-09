@@ -202,12 +202,8 @@ _w_: ace      _R_: rotate
   ;; ("H" #'help-command "My help command")
   ;; sub-hydras
 
-
-
   ;; add keybinding for hydra
-  (evil-define-key `(normal visual) 'global (kbd "SPC") #'space-hydra/body)
-  (evil-define-key `(normal visual) 'global (kbd ",") 'major-mode-hydra-launcher))
-
+  (evil-define-key `(normal visual) 'global (kbd "SPC") #'space-hydra/body))
 
 ;;; Commentary:
 (provide 'my-hydra)
