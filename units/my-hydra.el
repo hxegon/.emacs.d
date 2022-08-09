@@ -158,9 +158,16 @@ _w_: ace      _R_: rotate
       ('clojure-mode (clojure-mode-hydra/body))
       ('clojurescript-mode (clojure-mode-hydra/body))
       ('cider-repl-mode (clojure-mode-hydra/body)) ;; maybe make a specific cider repl hydra
-      (t (message "No major mode hydra found"))
-      )
-    )
+      (t (message "No major mode hydra found"))))
+
+  (defun jump-to-init ()
+    (interactive)
+    (find-file (expand-file-name "~/.emacs.d/init.el")))
+
+  (defhydra config-hydra
+    (:exit t)
+    ( "i" #'jump-to-init "Open init.el")
+    ("SPC" #'open-init-and-find-project-file "Find config file"))
 
   ;; SPACE HYDRA
 
@@ -176,9 +183,11 @@ _w_: ace      _R_: rotate
     ("b" #'buffer-hydra/body "Buffer")
     ("w" #'window-hydra/body "Windows")
     ("g" #'git-hydra-if-repo "Git")
-    ;; ("H" #'help-command "My help command")
-    ;; sub-hydras
-  )
+    ("c" #'major-mode-hydra-launcher "Code")
+    ("C" #'config-hydra/body "Config"))
+  ;; ("H" #'help-command "My help command")
+  ;; sub-hydras
+
 
 
   ;; add keybinding for hydra
