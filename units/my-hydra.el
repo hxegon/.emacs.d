@@ -112,16 +112,22 @@ _w_: ace      _R_: rotate
 
   ;; MAJOR MODE HYDRA
 
+  (defhydra elisp-eval-hydra
+    (:exit t)
+    ("e" #'eval-defun "eval defun")
+    ("x" #'eval-last-sexp "eval last sexp")
+    ("b" #'eval-buffer "eval buffer"))
+
+  (defhydra elisp-doc-hydra
+    (:exit t)
+    ("v" #'counsel-describe-variable "describe variable")
+    ("f" #'counsel-describe-function "describe function")
+    ("m" #'counsel-describe-mode "describe mode"))
+
   (defhydra emacs-lisp-mode-hydra
     (:exit t)
-    ("e" #'eval-defun "eval defun" :column "Eval")
-    ("x" #'eval-last-sexp "eval last sexp" :column "Eval")
-    ("b" #'eval-buffer "eval buffer" :column "Eval")
-
-    ("v" #'counsel-describe-variable "describe variable" :column "Describe")
-    ("f" #'counsel-describe-function "describe function" :column "Describe")
-    ("m" #'counsel-describe-mode "describe mode" :column "Describe")
-    )
+    ("d" #'elisp-doc-hydra/body "Documentation")
+    ("e" #'elisp-eval-hydra/body "Eval"))
 
   (defhydra clojure-eval-hydra
     (:exit t)
