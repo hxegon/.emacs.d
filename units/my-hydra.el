@@ -50,32 +50,33 @@ _l_: right    _L_: right
 _w_: ace      _R_: rotate
 "
     ;; move
-    ("H" #'evil-window-move-far-left)
-    ("J" #'evil-window-move-far-down)
-    ("K" #'evil-window-move-far-up)
-    ("L" #'evil-window-move-far-right)
-    ("R" #'evil-window-rotate-downwards)
+    ("H" #'evil-window-move-far-left :exit t)
+    ("J" #'evil-window-move-far-down :exit t)
+    ("K" #'evil-window-move-far-up :exit t)
+    ("L" #'evil-window-move-far-right :exit t)
+    ("R" #'evil-window-rotate-downwards :exit t)
 
     ;; jump
     ("h" #'evil-window-left)
     ("j" #'evil-window-down)
     ("k" #'evil-window-up)
     ("l" #'evil-window-right)
-    ("w" #'ace-window)
+    ("w" #'ace-window :exit t)
 
     ;; delete
-    ("c" #'delete-window)
-    ("o" #'delete-other-windows)
+    ("c" #'delete-window :exit t)
+    ("o" #'delete-other-windows :exit t)
 
     ;; split
-    ("s" #'evil-window-split)
-    ("v" #'evil-window-vsplit)
-    )
+    ("s" #'evil-window-split :exit t)
+    ("v" #'evil-window-vsplit :exit t))
+
 
   ;; GIT HYDRA
 
   (defhydra git-hydra
-    (:color green :post (quit-windows-on "*git-gutter:diff*"))
+    ;; (:color green :post (quit-windows-on "*git-gutter:diff*"))
+    (:color green)
     "Git"
 
     ("g" #'magit-status "Status" :exit t :column "Repo")
