@@ -26,6 +26,7 @@
   (setq
     ;; aggressive indent mode?
     cider-enrich-classpath nil
+    cider-dynamic-indentation nil
     cider-prompt-for-symbol 't))
         ;; disable eldoc at point for cider in favor of lsp
         ;; cider-eldoc-display-for-symbol-at-point nil))
