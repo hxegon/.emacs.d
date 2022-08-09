@@ -46,8 +46,9 @@
 (require 'my-projectile)
 (require 'my-hydra)
 (require 'my-clojure-mode)
+(require 'my-parinfer)
 ;; (require 'my-smartparens)
-(require 'my-lispy)
+;; (require 'my-lispy)
 ;; (require 'my-paredit)
 ;; (require 'my-parinfer)
 
