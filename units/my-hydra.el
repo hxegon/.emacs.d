@@ -26,15 +26,14 @@
     (:color blue :exit t :columns 3)
     ("p" #'previous-buffer "Previous buffer")
     ("n" #'next-buffer "Next buffer")
-    ("l" #'evil-switch-to-windows-last-buffer "Last buffer")
-    ("SPC" #'ivy-switch-buffer "Switch buffer")
-    ("B" #'ibuffer "ibuffer")
-    ("k" #'kill-buffer "Kill this buffer" :color red)
-    ("K" #'kill-current-buffer "Kill a buffer" :color red :exit t)
+    ("l" #'evil-switch-to-windows-last-buffer "Last buffer" :exit t)
+    ("b" #'ivy-switch-buffer "Switch buffer" :exit t)
+    ("B" #'ibuffer "ibuffer" :exit t)
+    ("K" #'kill-buffer "Kill buffer" :color red :exit t)
+    ("k" #'kill-current-buffer "Kill this buffer" :color red :exit t)
     ("s" #'save-buffer "Save buffer" :exit t)
     ("S" #'save-some-buffer "Save modified buffers" :exit t)
-    ("r" #'revert-buffer "Revert buffer" :color red)
-    )
+    ("r" #'revert-buffer "Revert buffer" :color red))
 
   ;; WINDOW HYDRA
 
