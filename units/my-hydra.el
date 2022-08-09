@@ -122,25 +122,34 @@ _w_: ace      _R_: rotate
     ("m" #'counsel-describe-mode "describe mode" :column "Describe")
     )
 
-  (defhydra clojure-mode-hydra
-    ;; Add "EVAL AT MARK" fn
+  (defhydra clojure-eval-hydra
     (:exit t)
-    ("e" #'cider-eval-defun-at-point "eval defun (C-u to inst.)" :column "Eval")
-    ("x" #'cider-eval-last-sexp "eval last sexp" :column "Eval")
+    ("d" #'cider-eval-defun-at-point "eval defun (C-u to inst.)" :column "Eval")
+    ("s" #'cider-eval-last-sexp "eval last sexp" :column "Eval")
     ("b" #'cider-eval-buffer "eval buffer" :column "Eval")
     ("n" #'cider-ns-reload "reload ns" :column "Eval")
-    ("N" #'cider-ns-reload-all "reload ns and libs" :column "Eval")
+    ("N" #'cider-ns-reload-all "reload ns and libs" :column "Eval"))
 
+  (defhydra clojure-repl-hydra
+    (:exit t)
     ("j" #'cider-jack-in-clj "jack in clj" :column "REPL")
     ("J" #'cider-jack-in-cljs "jack in cljs" :column "REPL")
     ("c" #'cider-connect "connect" :column "REPL")
     ("r" #'cider-switch-to-repl-buffer "repl" :column "REPL")
-    ("q" #'cider-quit "quit" :column "REPL")
+    ("q" #'cider-quit "quit" :column "REPL"))
 
-    ("d" #'cider-doc "cider doc" :column "Docs")
-    ("D" #'cider-clojuredocs "clojuredocs" :column "Docs")
-    ("w" #'cider-clojuredocs-web "clojuredocs in browser" :column "Docs")
-    )
+  (defhydra clojure-doc-hydra
+    (:exit t)
+    ("c" #'cider-doc "cider doc" :column "Docs")
+    ("d" #'cider-clojuredocs "clojuredocs" :column "Docs")
+    ("w" #'cider-clojuredocs-web "clojuredocs in browser" :column "Docs"))
+
+  (defhydra clojure-mode-hydra
+    ;; Add "EVAL AT MARK" fn
+    (:exit t)
+    ("e" #'clojure-eval-hydra/body "Eval")
+    ("d" #'clojure-doc-hydra/body "Documentation")
+    ("r" #'clojure-repl-hydra/body "REPL"))
 
   (defun major-mode-hydra-launcher ()
     (interactive)
