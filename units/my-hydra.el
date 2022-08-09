@@ -131,19 +131,19 @@ _w_: ace      _R_: rotate
 
   (defhydra clojure-eval-hydra
     (:exit t)
-    ("d" #'cider-eval-defun-at-point "eval defun (C-u to inst.)" :column "Eval")
-    ("s" #'cider-eval-last-sexp "eval last sexp" :column "Eval")
+    ("e" #'cider-eval-defun-at-point "eval defun (C-u to inst.)" :column "Eval")
+    ("l" #'cider-eval-last-sexp "eval last sexp" :column "Eval")
     ("b" #'cider-eval-buffer "eval buffer" :column "Eval")
     ("n" #'cider-ns-reload "reload ns" :column "Eval")
     ("N" #'cider-ns-reload-all "reload ns and libs" :column "Eval"))
 
   (defhydra clojure-repl-hydra
     (:exit t)
-    ("j" #'cider-jack-in-clj "jack in clj" :column "REPL")
-    ("J" #'cider-jack-in-cljs "jack in cljs" :column "REPL")
-    ("c" #'cider-connect "connect" :column "REPL")
-    ("r" #'cider-switch-to-repl-buffer "repl" :column "REPL")
-    ("q" #'cider-quit "quit" :column "REPL"))
+    ("j" #'cider-jack-in-clj "jack in clj")
+    ("J" #'cider-jack-in-cljs "jack in cljs")
+    ("c" #'cider-connect "connect")
+    ("r" #'cider-switch-to-repl-buffer "switch to repl buffer")
+    ("k" #'cider-quit "kill cider"))
 
   (defhydra clojure-doc-hydra
     (:exit t)
