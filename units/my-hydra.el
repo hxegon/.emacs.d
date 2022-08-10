@@ -21,9 +21,8 @@
 
   ;; BUFFER HYDRA
 
-  (defhydra buffer-hydra
-    ;; Change next/previous buffer to not exit. Could also display the "buffer order or whatever"
-    (:color blue :exit t :columns 3)
+  (defhydra my-buffer-hydra
+    ()
     ("p" #'previous-buffer "Previous buffer")
     ("n" #'next-buffer "Next buffer")
     ("l" #'evil-switch-to-windows-last-buffer "Last buffer" :exit t)
@@ -194,7 +193,7 @@ _w_: ace      _R_: rotate
     ("e" #'counsel-M-x "Execute Command")
     ("." #'counsel-find-file "Find File")
     ("f" #'file-hydra/body "Files")
-    ("b" #'buffer-hydra/body "Buffer")
+    ("b" #'my-buffer-hydra/body "Buffer")
     ("w" #'window-hydra/body "Windows")
     ("g" #'git-hydra-if-repo "Git")
     ("c" #'major-mode-hydra-launcher "Code")
