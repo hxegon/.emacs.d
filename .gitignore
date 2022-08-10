@@ -9,3 +9,8 @@ custom.el
 secrets.el
 parinfer-rust/
 flycheck_init.el
+.cache/
+auto-save-list
+*.\#*
+.lsp-session*
+projectile-bookmarks.eld
