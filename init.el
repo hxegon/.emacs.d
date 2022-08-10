@@ -20,43 +20,33 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;;; MY CONFIG UNITS
+;; ensure packages by default. Use :ensure nil to override this.
+(setq use-package-always-ensure t)
 
 ;; Add unit files to path
 (add-to-list 'load-path (expand-file-name "units/" user-emacs-directory))
 
-;;; package template:
+;;; MY CONFIG UNITS
 
-;;; my-foo.el --- describe
-;;; Code:
-;;; Commentary:
-;(provide 'my-foo)
-;;; my-foo.el ends here
-
-; (require 'saveplace)
-
-;;; initial units
 (require 'my-prelude) ; load utility functions / libs
 (require 'base)
 (require 'my-theme)
+(require 'my-hydra)
 (require 'my-evil)
 (require 'my-git)
 (require 'my-which-key)
 (require 'my-ivy)
 (require 'my-projectile)
-(require 'my-hydra)
 (require 'my-clojure-mode)
 (require 'my-parinfer)
+
 ;; (require 'my-smartparens)
 ;; (require 'my-lispy)
 ;; (require 'my-paredit)
 ;; (require 'my-parinfer)
 
-;; (require 'my-projectile)
 ;; (require 'my-yasnippet)
-
-;; (require 'test-unit)
-;; (load (expand-file-name "units/test-unit.el" user-emacs-directory))
+;; (require 'my-perspective)
 
 ;; Visual jump hints a la Easymotion
 (use-package avy
