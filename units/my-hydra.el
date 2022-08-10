@@ -80,7 +80,7 @@ _w_: ace      _R_: rotate
 
     ("g" #'magit-status "Status" :exit t :column "Repo")
     ("F" #'magit-pull "Pull" :column "Repo" :exit t)
-    ("c" #'magit-commit "Commit" :column "Repo")
+    ("c" #'magit-commit "Commit" :column "Repo" :exit t)
     ("P" #'magit-push "Push" :column "Repo" :exit t)
     ("B" #'browse-repo "open in github" :column "Repo" :exit t)
 
