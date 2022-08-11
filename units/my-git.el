@@ -20,6 +20,9 @@
   :ensure t
   :after (projectile)
   :config
+  (add-to-list 'browse-at-remote-remote-type-regexps
+    '("^github\\.comcast\\.com$" . "github"))
+
   (defun browse-repo ()
     (interactive)
     (-> (projectile-acquire-root)
