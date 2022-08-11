@@ -28,6 +28,8 @@
 
 ;;; MY CONFIG UNITS
 
+;; TODO: extract package declarations and (package-initialize), separate config
+
 (require 'my-prelude) ; load utility functions / libs
 (require 'base)
 (require 'my-theme)
