@@ -37,8 +37,8 @@
   ;; WINDOW HYDRA
 
   (defhydra window-hydra
-    (:color orange :exit t :hint none)
-"
+    (:color orange :hint none)
+    "
 Windows:
 ^Jump^        ^Move^       ^Split^          ^Delete^
 -----------------------------------------------------
